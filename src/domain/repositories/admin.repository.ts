@@ -1,0 +1,4 @@
+
+interface IAdminRepo{
+    //Repo methods
+}
