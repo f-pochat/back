@@ -1,4 +1,8 @@
+import {Admin} from "../models/admin.model";
 
-interface IAdminRepo{
-    //Repo methods
+export interface IAdminRepo{
+
+    addAdmin(admin: Admin):void;
+
+    loginAdmin(admin: Admin):void;
 }
