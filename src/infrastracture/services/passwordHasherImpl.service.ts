@@ -6,6 +6,7 @@ export class PasswordHasherImpl implements IPasswordHasherRepo {
         return passwordHash.generate(password);
     }
 
-
-
+    compare(hashedPassword: string, password: string): boolean {
+        return passwordHash.verify(password,hashedPassword);
+    }
 }

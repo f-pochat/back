@@ -1,1 +1,0 @@
-Llamar de la infra a la app para dirigir al dominio

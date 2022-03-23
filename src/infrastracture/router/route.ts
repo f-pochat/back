@@ -1,11 +1,12 @@
 import express, {Router, Response, Request} from "express";
 import {graphqlHTTP} from "express-graphql";
 import {buildSchema} from "graphql";
-import {addUser} from "./adduser.route";
+import {addAdmin} from "./addAdmin.route";
 import {Admin} from "../../domain/models/admin.model";
 import {AddAdminController} from "../../application/controllers/addadmin.controller";
 import {AddAdminControllerProvider} from "../providers/addAdminController.provider";
 import exp from "constants";
+import {loginAdmin} from "./loginAdmin.route";
 
 const router = express.Router();
 
@@ -15,7 +16,8 @@ const schema = buildSchema(`
     }
     
     type Mutation{
-        addUser(input: AdminInput) : Admin
+        addAdmin(input: AdminInput) : Admin
+        loginAdmin(input: LoginAdminInput): Admin
     }
 
     type Admin{
@@ -29,11 +31,18 @@ const schema = buildSchema(`
         password: String!
         role: String!
     }
+    
+    input LoginAdminInput{
+        user:String!
+        password:String!
+    }
+    
 `)
 
 const root = {
     // @ts-ignore
-    addUser,
+    addAdmin,
+    loginAdmin,
 }
 
 router.use('/',  graphqlHTTP({
