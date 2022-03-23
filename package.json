@@ -15,6 +15,7 @@
     "express": "^4.17.3",
     "express-graphql": "^0.12.0",
     "graphql": "^16.3.0",
+    "password-hash": "^1.2.2",
     "pg": "^8.7.3",
     "postgres": "^1.0.2",
     "typeorm": "^0.3.1"
