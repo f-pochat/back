@@ -1,14 +1,21 @@
 import express, {Router, Response, Request} from "express";
 import {graphqlHTTP} from "express-graphql";
 import {buildSchema} from "graphql";
+import {addUser} from "./adduser.route";
 import {Admin} from "../../domain/models/admin.model";
 import {AddAdminController} from "../../application/controllers/addadmin.controller";
+import {AddAdminControllerProvider} from "../providers/addAdminController.provider";
+import exp from "constants";
 
 const router = express.Router();
 
 const schema = buildSchema(`
     type Query{
         text: String
+    }
+    
+    type Mutation{
+        addUser(input: AdminInput) : Admin
     }
 
     type Admin{
@@ -18,27 +25,21 @@ const schema = buildSchema(`
     }
 
     input AdminInput{
-        adminName:String!
-        adminPassword: String!
-        adminRole: String!
-    }
-
-    type Mutation{
-        addUser(admin: AdminInput) : Admin
+        user:String!
+        password: String!
+        role: String!
     }
 `)
 
 const root = {
+    // @ts-ignore
     addUser,
 }
 
-// define the home page route
-router.get('/',  graphqlHTTP({
+router.use('/',  graphqlHTTP({
     schema:schema,
     rootValue: root,
     graphiql: false,
 }));
 
-
-module.exports = router;
-
+export {router}

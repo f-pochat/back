@@ -15,8 +15,6 @@ export class AddAdminService{
     register = async(user: string, password: string, role: string):Promise<Admin> => {
         if (password.length < 7) throw Error("Password should contain more than 7 characters");
         if (user.length < 1) throw Error("Username not valid!");
-        // @ts-ignore
-        if (role != "Editor" || role != "Admin") throw Error("Role not found!");
 
         const admin: Admin = await this.adminRepo.getByUsername(user);
         if (admin) throw Error("User already exists!");

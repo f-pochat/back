@@ -1,11 +1,17 @@
-import {Database} from "./infrastracture/db/database";
+
 import express,{Request,Response, Application} from 'express';
+import {connect} from "./infrastracture/db/database";
+import {router} from "./infrastracture/router/route";
 
 const app: Application= express();
 
-app.listen(4000);
-app.get('/',(req: Request,res:Response) => {
-    res.send;
-})
-const db: Database = new Database();
-db.connect();
+app.use(router);
+
+const startServer = (): void => {
+
+    const PORT = app.get('port')
+    app.listen(4000);
+    connect();
+};
+
+startServer();
