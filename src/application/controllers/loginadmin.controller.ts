@@ -11,7 +11,7 @@ export class LoginAdminController {
         this.loginAdminService = loginAdminService;
     }
 
-    async loginAdmin(user: string, password: string): Promise<Admin>{
+    async loginAdmin(user: string, password: string): Promise<any>{
         return await this.loginAdminService.login(user,password);
     }
 }

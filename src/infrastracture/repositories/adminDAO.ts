@@ -19,8 +19,8 @@ export class AdminDAO implements IAdminRepo {
         );
     }
 
-    loginAdmin(admin: Admin): void {
-        //TODO
+    editAdmin(user: string, newPassword: string): void {
+        this.repo.update(user,{password:newPassword}).then(r => r);
     }
 
 }

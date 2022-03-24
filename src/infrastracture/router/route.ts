@@ -7,6 +7,7 @@ import {AddAdminController} from "../../application/controllers/addadmin.control
 import {AddAdminControllerProvider} from "../providers/addAdminController.provider";
 import exp from "constants";
 import {loginAdmin} from "./loginAdmin.route";
+import {editAdmin} from "./editAdmin.route";
 
 const router = express.Router();
 
@@ -17,7 +18,13 @@ const schema = buildSchema(`
     
     type Mutation{
         addAdmin(input: AdminInput) : Admin
-        loginAdmin(input: LoginAdminInput): Admin
+        loginAdmin(input: LoginAdminInput): Token
+        editAdmin(input: EditAdminInput): Admin
+    }
+    
+    type Token{
+        token: String!
+        role: String!
     }
 
     type Admin{
@@ -37,18 +44,24 @@ const schema = buildSchema(`
         password:String!
     }
     
+    input EditAdminInput{
+        user: String!
+        password: String!
+    }
+    
 `)
 
 const root = {
     // @ts-ignore
     addAdmin,
     loginAdmin,
+    editAdmin,
 }
 
 router.use('/',  graphqlHTTP({
     schema:schema,
     rootValue: root,
-    graphiql: false,
+    graphiql: true,
 }));
 
 export {router}

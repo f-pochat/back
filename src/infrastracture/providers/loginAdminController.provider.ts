@@ -6,6 +6,8 @@ import {AdminDAO} from "../repositories/adminDAO";
 import {PasswordHasherImpl} from "../services/passwordHasherImpl.service";
 import {LoginAdminController} from "../../application/controllers/loginadmin.controller";
 import {LoginAdminService} from "../../domain/services/loginAdmin.service";
+import {ITokenProv} from "../../domain/repositories/token.repository";
+import {TokenProv} from "../services/TokenProv";
 
 export class LoginAdminControllerProvider{
 
@@ -15,8 +17,9 @@ export class LoginAdminControllerProvider{
         const adminRepository: IAdminRepo = new AdminDAO();
         // @ts-ignore
         const passwordHasher: IPasswordHasherRepo = new PasswordHasherImpl();
+        const tokenProv: ITokenProv = new TokenProv();
 
-        const loginAdminService: LoginAdminService = new LoginAdminService(adminRepository, passwordHasher);
+        const loginAdminService: LoginAdminService = new LoginAdminService(adminRepository, passwordHasher, tokenProv);
         return new LoginAdminController(loginAdminService);
     }
 
