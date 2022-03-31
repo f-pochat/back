@@ -1,4 +1,3 @@
-import {Admin} from "../../domain/models/admin.model";
 import {EditAdminService} from "../../domain/services/editAdmin.service";
 
 

@@ -1,12 +1,15 @@
 import {Entity, PrimaryColumn, Column} from "typeorm";
 
+@Entity()
+export class AdminDB{
 
-export class Admin{
-
+    @PrimaryColumn()
     user: string;
 
+    @Column()
     password: string;
 
+    @Column()
     role: string;
 
 

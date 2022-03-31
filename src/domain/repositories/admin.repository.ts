@@ -1,4 +1,4 @@
-import {Admin} from "../models/admin.model";
+import {Admin} from "../modelsDB/admin.modeldb";
 
 export interface IAdminRepo{
 

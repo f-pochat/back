@@ -1,7 +1,7 @@
-import {Admin} from "../models/admin.model";
 import {IAdminRepo} from "../repositories/admin.repository";
 import {IPasswordHasherRepo} from "../repositories/passwordhasher.respository";
 import {ITokenProv} from "../repositories/token.repository";
+import {Admin} from "../models/admin.model";
 
 export class LoginAdminService{
     private adminRepo: IAdminRepo;

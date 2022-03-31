@@ -1,5 +1,8 @@
 import {createConnection} from "typeorm";
-import {Admin} from "../../domain/models/admin.model";
+import {TeeboxDB} from "../../domain/modelsDB/course/teebox.model";
+import {HoleDB} from "../../domain/modelsDB/course/hole.modeldb";
+import {CourseDB} from "../../domain/modelsDB/course/course.modeldb";
+import {AdminDB} from "../../domain/modelsDB/admin.modeldb";
 
 const runDbConnection = async (): Promise<void> => {
     const connection = createConnection({
@@ -12,7 +15,10 @@ const runDbConnection = async (): Promise<void> => {
         database: "golfTrack",
         synchronize: true,
         entities: [
-            Admin
+            AdminDB,
+            CourseDB,
+            HoleDB,
+            TeeboxDB,
         ],
     })
 };

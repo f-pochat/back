@@ -1,4 +1,3 @@
-import {Admin} from "../models/admin.model";
 import {IAdminRepo} from "../repositories/admin.repository";
 import {IPasswordHasherRepo} from "../repositories/passwordhasher.respository";
 

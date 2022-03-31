@@ -1,15 +1,15 @@
 import {IAdminRepo} from "../../domain/repositories/admin.repository";
-import {Admin} from "../../domain/models/admin.model";
 import {getRepository} from "typeorm";
+import {AdminDB} from "../../domain/modelsDB/admin.modeldb";
 
 export class AdminDAO implements IAdminRepo {
-    repo = getRepository(Admin, "db");
+    repo = getRepository(AdminDB, "db");
 
-    addAdmin(admin: Admin): void {
+    addAdmin(admin: AdminDB): void {
         this.repo.save(admin).then(r => r);
     }
 
-    async getByUsername(username: String): Promise<Admin>{
+    async getByUsername(username: String): Promise<AdminDB>{
         // @ts-ignore
         return await this.repo.findOne(
             // @ts-ignore
