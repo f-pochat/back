@@ -1,8 +1,9 @@
-import {Admin} from "../modelsDB/admin.modeldb";
+import {AdminDB} from "../modelsDB/admin.modeldb";
+import {Admin} from "../models/admin.model";
 
 export interface IAdminRepo{
 
-    addAdmin(admin: Admin):void;
+    addAdmin(admin: AdminDB):void;
 
     editAdmin(user: string, newPassword: string): void;
 

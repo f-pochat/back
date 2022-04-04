@@ -1,7 +1,7 @@
-import {AdminDB} from "../modelsDB/admin.modeldb";
-import {IAdminRepo} from "../repositories/admin.repository";
-import {IPasswordHasherRepo} from "../repositories/passwordhasher.respository";
-import {Admin} from "../models/admin.model";
+import {AdminDB} from "../../modelsDB/admin.modeldb";
+import {IAdminRepo} from "../../repositories/admin.repository";
+import {IPasswordHasherRepo} from "../../repositories/passwordhasher.respository";
+import {Admin} from "../../models/admin.model";
 
 export class AddAdminService{
     private adminRepo: IAdminRepo;

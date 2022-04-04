@@ -1,9 +1,9 @@
-import {AddAdminController} from "../../application/controllers/addadmin.controller";
-import {IAdminRepo} from "../../domain/repositories/admin.repository";
-import {IPasswordHasherRepo} from "../../domain/repositories/passwordhasher.respository";
-import {AddAdminService} from "../../domain/services/addAdmin.service";
-import {AdminDAO} from "../repositories/adminDAO";
-import {PasswordHasherImpl} from "../services/passwordHasherImpl.service";
+import {AddAdminController} from "../../../application/controllers/admin/addadmin.controller";
+import {IAdminRepo} from "../../../domain/repositories/admin.repository";
+import {IPasswordHasherRepo} from "../../../domain/repositories/passwordhasher.respository";
+import {AddAdminService} from "../../../domain/services/admin/addAdmin.service";
+import {AdminDAO} from "../../repositories/adminDAO";
+import {PasswordHasherImpl} from "../../services/passwordHasherImpl.service";
 
 export class AddAdminControllerProvider{
 

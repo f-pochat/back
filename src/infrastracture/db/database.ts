@@ -1,5 +1,5 @@
 import {createConnection} from "typeorm";
-import {TeeboxDB} from "../../domain/modelsDB/course/teebox.model";
+import {TeeboxDB} from "../../domain/modelsDB/course/teebox.modeldb";
 import {HoleDB} from "../../domain/modelsDB/course/hole.modeldb";
 import {CourseDB} from "../../domain/modelsDB/course/course.modeldb";
 import {AdminDB} from "../../domain/modelsDB/admin.modeldb";

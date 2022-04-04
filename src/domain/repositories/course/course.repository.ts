@@ -1,6 +1,8 @@
-import {Course} from "../../modelsDB/course/course.modeldb";
-import {Hole} from "../../modelsDB/course/hole.modeldb";
+import {CourseDB} from "../../modelsDB/course/course.modeldb";
+import {Course} from "../../models/course/course.model";
+
 
 export interface ICourseRepo {
-    addCourse(course: Course): Course;
+    addCourse(course: CourseDB): Course;
+    deleteCourse(id: string): void;
 }

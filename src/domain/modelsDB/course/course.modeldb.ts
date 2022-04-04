@@ -7,6 +7,9 @@ export class CourseDB{
     id: string;
 
     @Column()
+    isActive: boolean;
+
+    @Column()
     name: string;
 
     @Column()
@@ -24,6 +27,7 @@ export class CourseDB{
 
     constructor(id: string, name: string, creator: string, description: string, locationLat: string, locationLong: string) {
         this.id = id;
+        this.isActive = true;
         this.name = name;
         this.creator = creator;
         this.description = description;

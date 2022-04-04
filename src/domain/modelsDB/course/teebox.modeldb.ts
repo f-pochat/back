@@ -7,6 +7,9 @@ export class TeeboxDB {
     id: string;
 
     @Column()
+    isActive: boolean;
+
+    @Column()
     name: string;
 
     @Column()
@@ -30,6 +33,7 @@ export class TeeboxDB {
 
     constructor(id: string, name: string, color: string, locationLat: string, locationLong: string, par: number, scoringIndex: number, hole: string) {
         this.id = id;
+        this.isActive = true;
         this.name = name;
         this.color = color;
         this.locationLat = locationLat;

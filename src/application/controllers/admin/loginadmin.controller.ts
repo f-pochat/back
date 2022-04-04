@@ -1,4 +1,4 @@
-import {LoginAdminService} from "../../domain/services/loginAdmin.service";
+import {LoginAdminService} from "../../../domain/services/admin/loginAdmin.service";
 
 
 export class LoginAdminController {

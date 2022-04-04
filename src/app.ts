@@ -1,11 +1,13 @@
+import {adminRouter} from "./infrastracture/router/admin/route";
 const cors = require('cors');
 import express,{Request,Response, Application} from 'express';
 import {connect} from "./infrastracture/db/database";
-import {router} from "./infrastracture/router/route";
+import {courseRouter} from "./infrastracture/router/course/route";
 
 const app: Application= express();
 app.use(cors())
-app.use(router);
+app.use(adminRouter);
+app.use(courseRouter);
 
 const startServer = (): void => {
 

@@ -1,6 +1,6 @@
-import {AddAdminService} from "../../domain/services/addAdmin.service";
-import {AddCourseService} from "../../domain/services/addCourse.service";
-import {Admin} from "../../domain/models/admin.model";
+import {AddAdminService} from "../../../domain/services/admin/addAdmin.service";
+import {AddCourseService} from "../../../domain/services/course/addCourse.service";
+import {Admin} from "../../../domain/models/admin.model";
 
 
 export class AddAdminController {

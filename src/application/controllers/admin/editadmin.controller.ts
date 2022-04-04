@@ -1,4 +1,4 @@
-import {EditAdminService} from "../../domain/services/editAdmin.service";
+import {EditAdminService} from "../../../domain/services/admin/editAdmin.service";
 
 
 export class EditAdminController {

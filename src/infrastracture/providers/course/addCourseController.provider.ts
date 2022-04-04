@@ -1,14 +1,14 @@
-import {AddAdminController} from "../../application/controllers/addadmin.controller";
-import {ICourseRepo} from "../../domain/repositories/course/course.repository";
-import {AddCourseService} from "../../domain/services/addCourse.service";
-import {CourseDAO} from "../repositories/courseDAO";
-import {AddCourseController} from "../../application/controllers/addcourse.controller";
-import {IIdRepo} from "../../domain/repositories/id.repository";
-import IdGenerator from "../services/idGenerator";
-import {IHoleRepo} from "../../domain/repositories/course/hole.repository";
-import {ITeeboxRepo} from "../../domain/repositories/course/teebox.repository";
-import {HoleDAO} from "../repositories/holeDAO";
-import {TeeboxDAO} from "../repositories/teeboxDAO";
+import {AddAdminController} from "../../../application/controllers/admin/addadmin.controller";
+import {ICourseRepo} from "../../../domain/repositories/course/course.repository";
+import {AddCourseService} from "../../../domain/services/course/addCourse.service";
+import {CourseDAO} from "../../repositories/course/courseDAO";
+import {AddCourseController} from "../../../application/controllers/course/addcourse.controller";
+import {IIdRepo} from "../../../domain/repositories/id.repository";
+import IdGenerator from "../../services/idGenerator";
+import {IHoleRepo} from "../../../domain/repositories/course/hole.repository";
+import {ITeeboxRepo} from "../../../domain/repositories/course/teebox.repository";
+import {HoleDAO} from "../../repositories/course/holeDAO";
+import {TeeboxDAO} from "../../repositories/course/teeboxDAO";
 
 export class AddCourseControllerProvider{
 

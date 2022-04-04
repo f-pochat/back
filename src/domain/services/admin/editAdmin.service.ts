@@ -1,5 +1,5 @@
-import {IAdminRepo} from "../repositories/admin.repository";
-import {IPasswordHasherRepo} from "../repositories/passwordhasher.respository";
+import {IAdminRepo} from "../../repositories/admin.repository";
+import {IPasswordHasherRepo} from "../../repositories/passwordhasher.respository";
 
 export class EditAdminService{
     private adminRepo: IAdminRepo;

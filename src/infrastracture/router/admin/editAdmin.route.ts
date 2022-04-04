@@ -1,5 +1,5 @@
-import {EditAdminControllerProvider} from "../providers/editAdminController.provider";
-import {verifyToken} from "./verifyToken";
+import {EditAdminControllerProvider} from "../../providers/admin/editAdminController.provider";
+import {verifyToken} from "../verifyToken";
 
 export const editAdmin = async ({input}:any,req: Request): Promise<void> => {
     const {user,password}:{user:string,password: string} = input;

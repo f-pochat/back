@@ -1,7 +1,8 @@
-import {Course} from "../../modelsDB/course/course.modeldb";
-import {Hole} from "../../modelsDB/course/hole.modeldb";
-import {Teebox} from "../../modelsDB/course/teebox.model";
+import {TeeboxDB} from "../../modelsDB/course/teebox.modeldb";
+import {Teebox} from "../../models/course/teebox.model";
+
 
 export interface ITeeboxRepo {
-    addTeebox(teebox: Teebox): Teebox;
+    addTeebox(teebox: TeeboxDB): Teebox;
+    deleteTeeboxes(holes: string[]) : void;
 }

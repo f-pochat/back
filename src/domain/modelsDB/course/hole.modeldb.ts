@@ -7,6 +7,9 @@ export class HoleDB {
     id: string;
 
     @Column()
+    isActive: boolean;
+
+    @Column()
     num: number;
 
     @Column()
@@ -27,6 +30,7 @@ export class HoleDB {
 
     constructor(id: string, num: number, locationMidFWLat: string, locationMidFWLong: string, locationGreenLat: string, locationGreenLong: string, course: string) {
         this.id = id;
+        this.isActive = true;
         this.num = num;
         this.locationMidFWLat = locationMidFWLat;
         this.locationMidFWLong = locationMidFWLong;

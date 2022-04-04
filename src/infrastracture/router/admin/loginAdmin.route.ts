@@ -1,4 +1,4 @@
-import {LoginAdminControllerProvider} from "../providers/loginAdminController.provider";
+import {LoginAdminControllerProvider} from "../../providers/admin/loginAdminController.provider";
 
 export const loginAdmin = async ({input}:any): Promise<any> => {
     const {user, password}:{user:string, password:string} = input;
