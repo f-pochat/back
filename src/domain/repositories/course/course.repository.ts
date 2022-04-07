@@ -5,4 +5,5 @@ import {Course} from "../../models/course/course.model";
 export interface ICourseRepo {
     addCourse(course: CourseDB): Course;
     deleteCourse(id: string): void;
+    getCourses(): Promise<CourseDB[]>;
 }

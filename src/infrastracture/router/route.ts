@@ -1,26 +1,57 @@
 import express, {Router, Response, Request} from "express";
 import {graphqlHTTP} from "express-graphql";
 import {buildSchema} from "graphql";
-import {addAdmin} from "../admin/addAdmin.route";
-import {deleteCourse} from "./deleteCourse.route";
-import {addCourse} from "./addCourse.route";
+import {loginAdmin} from "./admin/loginAdmin.route";
+import {editAdmin} from "./admin/editAdmin.route";
+import {addCourse} from "./course/addCourse.route";
+import {addAdmin} from "./admin/addAdmin.route";
+import {deleteCourse} from "./course/deleteCourse.route";
+import {getCourses} from "./course/getCourses.route";
 
-const courseRouter = express.Router();
+
+const router = express.Router();
 
 const schema = buildSchema(`
     type Query{
-        text: String
+        getCourses : [Course]
     }
     
     type Mutation{
+        addAdmin(input: AdminInput) : Admin
+        loginAdmin(input: LoginAdminInput): Token
+        editAdmin(input: EditAdminInput): Admin
         addCourse(input: CourseInput) : Course
         deleteCourse(id: String) : ID
+        
     }
     
     type Token{
         token: String!
         role: String!
     }
+
+    type Admin{
+        user: String!
+        password: String!
+        role: String!
+    }
+
+    input AdminInput{
+        user:String!
+        password: String!
+        role: String!
+    }
+    
+    input LoginAdminInput{
+        user:String!
+        password:String!
+    }
+    
+    input EditAdminInput{
+        user: String!
+        password: String!
+    }
+ 
 
     type Course{
         id: String!
@@ -55,15 +86,7 @@ const schema = buildSchema(`
         long: String!
     }
     
-    input LoginAdminInput{
-        user:String!
-        password:String!
-    }
     
-    input EditAdminInput{
-        user: String!
-        password: String!
-    }
     
     input CourseInput{
         name: String!
@@ -96,13 +119,18 @@ const schema = buildSchema(`
 
 const root = {
     // @ts-ignore
+    addAdmin,
+    loginAdmin,
+    editAdmin,
     addCourse,
-    deleteCourse
+    deleteCourse,
+    getCourses,
 }
-courseRouter.use('/course',  graphqlHTTP({
+
+router.use('/admin',  graphqlHTTP({
     schema:schema,
     rootValue: root,
     graphiql: true,
 }));
 
-export {courseRouter}
+export {router}

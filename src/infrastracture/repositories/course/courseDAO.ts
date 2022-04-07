@@ -20,4 +20,14 @@ export class CourseDAO implements ICourseRepo {
 
         DeleteCourseControllerProvider.getController().deleteHoles(id).then(r => r);
     }
+
+    async getCourses(): Promise<CourseDB[]> {
+        return await this.repo.find({
+            where:{
+                isActive:true,
+            }
+        });
+    }
+
+
 }
