@@ -6,9 +6,9 @@ import {Loc} from "../../../domain/models/course/location.model";
 import {GetCoursesControllerProvider} from "../../providers/course/getCourseController.provider";
 import {CourseDB} from "../../../domain/modelsDB/course/course.modeldb";
 
-export const getCourses = async (args: any, req: Request): Promise<CourseDB[]> => {
+export const getCourses = async (req: Request): Promise<CourseDB[]> => {
 
     /*const token: string = <string>req.headers['authorization'];
     const username: string = verifyAdmin(token.substring(7));*/
-    return await GetCoursesControllerProvider.getController().getCourse();
+    return await GetCoursesControllerProvider.getController().getCourses();
 }

@@ -2,8 +2,6 @@
 import {getRepository, In, Repository} from "typeorm";
 import {ITeeboxRepo} from "../../../domain/repositories/course/teebox.repository";
 import {TeeboxDB} from "../../../domain/modelsDB/course/teebox.modeldb";
-import {HoleDB} from "../../../domain/modelsDB/course/hole.modeldb";
-import {DeleteCourseControllerProvider} from "../../providers/course/deleteCourseController.provider";
 
 
 export class TeeboxDAO implements ITeeboxRepo {
@@ -14,15 +12,18 @@ export class TeeboxDAO implements ITeeboxRepo {
         this.repo.save(teebox).then(r => r);
     };
 
+    //@ts-ignore
+    editTeebox(id: string, newTeebox: TeeboxDB): void {
+        this.repo.update(id, newTeebox).then(r => r);
+    }
+
     private _getTeeboxes = function (hole: string): TeeboxDB[] {
 
         // @ts-ignore
-        const holeId = this.repo.find({
+        return this.repo.find({
             select: ['id'],
-            where: { hole: hole },
+            where: {hole: hole},
         });
-
-        return holeId;
     }
 
 

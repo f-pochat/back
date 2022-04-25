@@ -6,4 +6,6 @@ export interface ICourseRepo {
     addCourse(course: CourseDB): Course;
     deleteCourse(id: string): void;
     getCourses(): Promise<CourseDB[]>;
+    getCourse(id: string): Promise<CourseDB>;
+    editCourse(id: string, course: CourseDB): Course;
 }

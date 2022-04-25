@@ -3,6 +3,7 @@ import {Hole} from "../../models/course/hole.model";
 
 export interface IHoleRepo {
     addHole(hole: HoleDB): Hole;
+    editHole(id: string, newHole : HoleDB): Hole;
 
     deleteHoles(id: string): string[];
 }

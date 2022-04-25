@@ -21,4 +21,8 @@ export class GetCoursesService{
 
         return await this.courseRepo.getCourses()
     }
+
+    getCourse = async(id: string):Promise<CourseDB> => {
+        return await this.courseRepo.getCourse(id)
+    }
 }

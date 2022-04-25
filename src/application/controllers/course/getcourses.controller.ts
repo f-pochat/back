@@ -15,7 +15,11 @@ export class GetcoursesController {
         this.getCoursesService = getCourseService;
     }
 
-    async getCourse(): Promise<CourseDB[]>{
+    async getCourses(): Promise<CourseDB[]>{
         return await this.getCoursesService.getCourses();
+    }
+
+    async getCourse(id: string): Promise<CourseDB>{
+        return await this.getCoursesService.getCourse(id);
     }
 }

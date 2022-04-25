@@ -2,8 +2,6 @@
 import {getRepository} from "typeorm";
 import {ICourseRepo} from "../../../domain/repositories/course/course.repository";
 import {CourseDB} from "../../../domain/modelsDB/course/course.modeldb";
-import {AddCourseController} from "../../../application/controllers/course/addcourse.controller";
-import {AddCourseControllerProvider} from "../../providers/course/addCourseController.provider";
 import {DeleteCourseControllerProvider} from "../../providers/course/deleteCourseController.provider";
 
 export class CourseDAO implements ICourseRepo {
@@ -13,6 +11,11 @@ export class CourseDAO implements ICourseRepo {
     addCourse = (course: CourseDB): void => {
         this.repo.save(course).then(r => r);
     };
+
+    //@ts-ignore
+    editCourse(id: string, course: CourseDB): void {
+        this.repo.update(id, course).then(r => r);
+    }
 
     deleteCourse = (id: string): void => {
         // @ts-ignore
@@ -29,5 +32,13 @@ export class CourseDAO implements ICourseRepo {
         });
     }
 
-
+    async getCourse(id: string): Promise<CourseDB> {
+        // @ts-ignore
+        return this.repo.findOne({
+            where:{
+                id:id,
+                isActive:true,
+            }
+        });
+    }
 }

@@ -7,6 +7,8 @@ import {addCourse} from "./course/addCourse.route";
 import {addAdmin} from "./admin/addAdmin.route";
 import {deleteCourse} from "./course/deleteCourse.route";
 import {getCourses} from "./course/getCourses.route";
+import {getCourse} from "./course/getCourse.route";
+import {editCourse} from "./course/editCourse.route";
 
 
 const router = express.Router();
@@ -14,6 +16,7 @@ const router = express.Router();
 const schema = buildSchema(`
     type Query{
         getCourses : [Course]
+        getCourse(id: String!) : Course
     }
     
     type Mutation{
@@ -22,7 +25,7 @@ const schema = buildSchema(`
         editAdmin(input: EditAdminInput): Admin
         addCourse(input: CourseInput) : Course
         deleteCourse(id: String) : ID
-        
+        editCourse(input: EditCourseInput) : Course
     }
     
     type Token{
@@ -86,7 +89,14 @@ const schema = buildSchema(`
         long: String!
     }
     
-    
+    input EditCourseInput{
+        id: String!
+        name: String!
+        creator: String!
+        description: String!
+        location: LocationInput!
+        holes: [EditHoleInput]!
+    }
     
     input CourseInput{
         name: String!
@@ -102,7 +112,24 @@ const schema = buildSchema(`
         teeboxes: [TeeboxInput]!
     }
     
+    input EditHoleInput{
+        id: String!
+        num: Int!
+        locationMiddleOfGreen: LocationInput!
+        locationMiddleOfFW: LocationInput!
+        teeboxes: [EditTeeboxInput]!
+    }
+    
     input TeeboxInput{
+        name: String!
+        color: String!
+        par: Int!
+        scoringIndex: Int!
+        locationTeeBox: LocationInput!
+    }
+    
+    input EditTeeboxInput{
+        id: String!
         name: String!
         color: String!
         par: Int!
@@ -125,6 +152,8 @@ const root = {
     addCourse,
     deleteCourse,
     getCourses,
+    getCourse,
+    editCourse,
 }
 
 router.use('/admin',  graphqlHTTP({

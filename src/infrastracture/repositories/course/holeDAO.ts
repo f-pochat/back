@@ -15,6 +15,11 @@ export class HoleDAO implements IHoleRepo {
     };
 
     // @ts-ignore
+    editHole(id: string, newHole: HoleDB): void {
+        this.repo.update(id, newHole).then(r => r);
+    }
+
+    // @ts-ignore
     deleteHoles = async (id: string): void => {
         const holesPr: HoleDB[] = await this.repo.find({
             where: {
