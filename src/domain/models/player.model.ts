@@ -1,12 +1,12 @@
 export class Player{
     email: string;
-    username: string;
+    fullname: string;
     password: string;
 
 
-    constructor(email: string, username: string, password: string) {
+    constructor(email: string, fullname: string, password: string) {
         this.email = email;
-        this.username = username;
+        this.fullname = fullname;
         this.password = password;
     }
 }

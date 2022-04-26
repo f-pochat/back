@@ -20,7 +20,7 @@ export class AddPlayerService{
 
         const hashedPassword = this.passwordHasher.hash(player.password);
 
-        const newPlayer: Player = new PlayerDB(player.email, player.username, hashedPassword);
+        const newPlayer: PlayerDB = new PlayerDB(player.email,true, player.fullname, hashedPassword);
         this.playerRepo.addPlayer(newPlayer);
         return newPlayer;
     }

@@ -1,10 +1,10 @@
 import {Player} from "../../../domain/models/player.model";
 import {AddPlayerControllerProvider} from "../../providers/player/addPlayerController.provider";
+import {DeletePlayerControllerProvider} from "../../providers/player/deletePlayerController.provider";
 
-export const addPlayer = async ({input}: any, req: Request): Promise<Player> => {
-    const {email, fullname, password}: { email: string, fullname: string, password: string } = input;
+export const deletePlayer = async ({email}:{email:string}, req: Request): Promise<void> => {
     // @ts-ignore
     const token: string = <string>req.headers['authorization'];
     //const username: string = verifyAdmin(token.substring(7));
-    return await AddPlayerControllerProvider.getController().addPlayer(email, fullname, password);
+    return await DeletePlayerControllerProvider.getController().deletePlayer(email);
 }

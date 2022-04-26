@@ -2,6 +2,7 @@ import express, {Router, Response, Request} from "express";
 import {graphqlHTTP} from "express-graphql";
 import {buildSchema} from "graphql";
 import {addPlayer} from "./addplayer.route";
+import {deletePlayer} from "./deleteplayer.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
@@ -11,6 +12,7 @@ const schema = buildSchema(`
     
     type Mutation{
         addPlayer(input: AddPlayerInput) : Player
+        deletePlayer(email: String!) : ID
     }
     
     type Token{
@@ -20,13 +22,13 @@ const schema = buildSchema(`
 
     type Player{
         email: String!
-        username: String!
+        fullname: String!
         password: String!
     }
 
     input AddPlayerInput{
         email:String!
-        username:String!
+        fullname:String!
         password: String!
     }
     
@@ -35,6 +37,7 @@ const schema = buildSchema(`
 const root = {
     // @ts-ignore
     addPlayer,
+    deletePlayer,
 }
 
 playerRouter.use('/player',  graphqlHTTP({

@@ -15,10 +15,10 @@ export class AddPlayerController {
     async addPlayer(email: string, username: string, password: string): Promise<Player>{
         if (username.length < 1) throw new Error("User not valid!");
         if (password.length < 8) throw new Error("Password must be more than 7 characters!");
-        /*
-        TODO Implement email regex verification
-         */
-        if (email.length < 1) throw new Error("Email not valid!");
+
+        if (!/^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(email)){
+            throw Error('Invalid email');
+        }
 
         return await this.addPlayerService.register(new Player(email,username,password));
     }

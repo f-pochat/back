@@ -6,15 +6,19 @@ export class PlayerDB{
     email: string;
 
     @Column()
-    username: string;
+    isActive: boolean;
+
+    @Column()
+    fullname: string;
 
     @Column()
     password: string;
 
 
-    constructor(email: string, username: string, password: string) {
+    constructor(email: string, isActive:boolean, fullname: string, password: string) {
         this.email = email;
-        this.username = username;
+        this.isActive = isActive;
+        this.fullname = fullname;
         this.password = password;
     }
 }
