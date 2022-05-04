@@ -13,10 +13,7 @@ export class DeletePlayerController {
         this._deletePlayerService = deletePlayerService;
     }
 
-    async deletePlayer(email: string): Promise<void>{
-
-        if (email.length < 1) throw new Error("Email not valid!");
-
-        return this._deletePlayerService.delete(email);
+    async deletePlayer(id: string): Promise<void>{
+        return this._deletePlayerService.delete(id);
     }
 }

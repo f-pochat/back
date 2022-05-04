@@ -10,7 +10,7 @@ export class DeletePlayerService{
         this.playerRepo = playerRepo;
     }
 
-    delete = async(email: string) : Promise<void> => {
-        await this.playerRepo.deletePlayer(email);
+    delete = async(id: string) : Promise<void> => {
+        await this.playerRepo.deletePlayer(id);
     }
 }

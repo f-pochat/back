@@ -8,26 +8,25 @@ import {PlayerDAO} from "../../repositories/playerDAO";
 import {IPlayerRepo} from "../../../domain/repositories/player.repository";
 import {AddPlayerController} from "../../../application/controllers/player/addPlayer.controller";
 import {AddPlayerService} from "../../../domain/services/player/addPlayer.service";
-import {IIdRepo} from "../../../domain/repositories/id.repository";
-import IdGenerator from "../../services/idGenerator";
+import {EditPlayerController} from "../../../application/controllers/player/editPlayer.controller";
+import {EditPlayerService} from "../../../domain/services/player/editPlayer.service";
 
-export class AddPlayerControllerProvider{
+export class EditPlayerControllerProvider{
 
-    private static addPlayerController: AddPlayerController;
+    private static editPlayerController: EditPlayerController;
 
-    static createController(): AddPlayerController{
-        const idRepo: IIdRepo = new IdGenerator();
+    static createController(): EditPlayerController{
         const playerRepository: IPlayerRepo = new PlayerDAO();
         const passwordHasher: IPasswordHasherRepo = new PasswordHasherImpl();
 
-        const addPlayerService: AddPlayerService = new AddPlayerService(idRepo, playerRepository, passwordHasher);
-        return new AddPlayerController(addPlayerService);
+        const editPlayerService: EditPlayerService = new EditPlayerService(playerRepository, passwordHasher);
+        return new EditPlayerController(editPlayerService);
     }
 
-    static getController(): AddPlayerController{
-        if(!this.addPlayerController){
-            this.addPlayerController = this.createController();
+    static getController(): EditPlayerController{
+        if(!this.editPlayerController){
+            this.editPlayerController = this.createController();
         }
-        return this.addPlayerController;
+        return this.editPlayerController;
     }
 }

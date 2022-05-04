@@ -25,15 +25,19 @@ export class PlayerDAO implements IPlayerRepo {
         );
     }
 
-    deletePlayer(email: string): void {
+    deletePlayer(id: string): void {
         // @ts-ignore
         this.repo.update(
             {
-                email: email,
+                id: id,
             },
             {
                 isActive: false,
             }
         ).then(r => r);
+    }
+
+    editPlayer(id: string, player: PlayerDB): void {
+        this.repo.update(id, player).then(r => r);
     }
 }
