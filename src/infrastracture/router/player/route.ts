@@ -4,6 +4,7 @@ import {buildSchema} from "graphql";
 import {addPlayer} from "./addplayer.route";
 import {deletePlayer} from "./deleteplayer.route";
 import {editPlayer} from "./editplayer.route";
+import {loginPlayer} from "./loginplayer.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
@@ -15,11 +16,11 @@ const schema = buildSchema(`
         addPlayer(input: AddPlayerInput) : Player
         deletePlayer(id: String!) : ID
         editPlayer(input: EditPlayerInput) : Player
+        loginPlayer(input: LoginPlayerInput) : Token
     }
     
     type Token{
         token: String!
-        role: String!
     }
 
     type Player{
@@ -46,6 +47,11 @@ const schema = buildSchema(`
         photo: String!
     }
     
+    input LoginPlayerInput{
+        email:String!
+        password: String!
+    }
+    
 `)
 
 const root = {
@@ -53,6 +59,7 @@ const root = {
     addPlayer,
     deletePlayer,
     editPlayer,
+    loginPlayer
 }
 
 playerRouter.use('/player',  graphqlHTTP({
