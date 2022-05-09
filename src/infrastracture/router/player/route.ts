@@ -5,11 +5,12 @@ import {addPlayer} from "./addplayer.route";
 import {deletePlayer} from "./deleteplayer.route";
 import {editPlayer} from "./editplayer.route";
 import {loginPlayer} from "./loginplayer.route";
+import {getAllCoursesDemo} from "./getcourses.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
     type Query{
-        get: String
+        getAllCoursesDemo : [CourseDemo]
     }
     
     type Mutation{
@@ -20,7 +21,7 @@ const schema = buildSchema(`
     }
     
     type Token{
-        token: String!
+        token: String
     }
 
     type Player{
@@ -30,6 +31,13 @@ const schema = buildSchema(`
         password: String!
         handicap: Float
         photo: String
+    }
+    
+    type CourseDemo{
+        id: String!
+        name: String!
+        locationLat: String!
+        locationLong: String!
     }
 
     input AddPlayerInput{
@@ -59,7 +67,8 @@ const root = {
     addPlayer,
     deletePlayer,
     editPlayer,
-    loginPlayer
+    loginPlayer,
+    getAllCoursesDemo,
 }
 
 playerRouter.use('/player',  graphqlHTTP({

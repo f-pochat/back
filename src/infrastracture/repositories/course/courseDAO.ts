@@ -41,4 +41,18 @@ export class CourseDAO implements ICourseRepo {
             }
         });
     }
+
+    async getAllCoursesDemo() : Promise<any[]> {
+        return await this.repo.find({
+            select:{
+              id:true,
+              name:true,
+              locationLat:true,
+              locationLong:true,
+            },
+            where:{
+                isActive:true,
+            },
+        });
+    }
 }

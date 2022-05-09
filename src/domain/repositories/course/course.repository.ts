@@ -8,4 +8,5 @@ export interface ICourseRepo {
     getCourses(): Promise<CourseDB[]>;
     getCourse(id: string): Promise<CourseDB>;
     editCourse(id: string, course: CourseDB): Course;
+    getAllCoursesDemo(): Promise<any[]>;
 }

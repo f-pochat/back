@@ -40,6 +40,6 @@ export class ABMPlayerService {
 
         const hashedPassword = this.passwordHasher.hash(player.password);
 
-        this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, player.fullname, player.handicap.toString(), player.photo));
+        this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, hashedPassword, player.handicap.toString(), player.photo));
     }
 }
