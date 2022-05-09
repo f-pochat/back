@@ -32,7 +32,14 @@ export class HoleDAO implements IHoleRepo {
             holes.push(r.id);
             this.repo.update(r.id,{isActive:false})
         });
+    }
 
-        await DeleteCourseControllerProvider.getController().deleteTeebox(holes);
+    getHoles = async(id: string): Promise<HoleDB[]> => {
+        return this.repo.find({
+            where: {
+                isActive: true,
+                course: id,
+            }
+        })
     }
 }

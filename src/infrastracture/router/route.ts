@@ -69,19 +69,10 @@ const schema = buildSchema(`
     type Hole{
         id: String!
         num: Int!
-        locationMiddleOfGreen: Location!
-        locationMiddleOfFW: Location!
-        course: String!
-        teeboxes: [Teebox]!
-    }
-    
-    type Teebox{
-        id: String!
-        name:String!
-        color: String!
         par: Int!
         scoringIndex: Int!
-        locationTeeBox: Location!
+        locationTeebox: Location!
+        locationMiddleOfGreen: Location!
     }
     
     type Location{
@@ -107,34 +98,19 @@ const schema = buildSchema(`
     }
     input HoleInput{
         num: Int!
+        par: Int!
+        scoringIndex: Int!
+        locationTeebox: LocationInput!
         locationMiddleOfGreen: LocationInput!
-        locationMiddleOfFW: LocationInput!
-        teeboxes: [TeeboxInput]!
     }
     
     input EditHoleInput{
         id: String!
         num: Int!
+        par: Int!
+        scoringIndex: Int!
         locationMiddleOfGreen: LocationInput!
-        locationMiddleOfFW: LocationInput!
-        teeboxes: [EditTeeboxInput]!
-    }
-    
-    input TeeboxInput{
-        name: String!
-        color: String!
-        par: Int!
-        scoringIndex: Int!
-        locationTeeBox: LocationInput!
-    }
-    
-    input EditTeeboxInput{
-        id: String!
-        name: String!
-        color: String!
-        par: Int!
-        scoringIndex: Int!
-        locationTeeBox: LocationInput!
+        locationTeebox: LocationInput!
     }
     
     input LocationInput{

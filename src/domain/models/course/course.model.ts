@@ -1,5 +1,4 @@
-import {Entity, PrimaryColumn, Column} from "typeorm";
-import {Teebox} from "./teebox.model";
+
 import {Hole} from "./hole.model";
 import {Loc} from "./location.model";
 

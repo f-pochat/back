@@ -21,8 +21,4 @@ export class DeleteCourseController {
     async deleteHoles(id: string) : Promise<void>{
         return await this.deleteCourseService.deleteHoles(id);
     }
-
-    async deleteTeebox(holes: string[]) : Promise<void>{
-        return await this.deleteCourseService.deleteTeeboxes(holes);
-    }
 }

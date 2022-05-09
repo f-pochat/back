@@ -19,7 +19,7 @@ export class GetcoursesController {
         return await this.getCoursesService.getCourses();
     }
 
-    async getCourse(id: string): Promise<CourseDB>{
+    async getCourse(id: string): Promise<any>{
         return await this.getCoursesService.getCourse(id);
     }
 }

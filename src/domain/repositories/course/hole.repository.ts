@@ -6,4 +6,5 @@ export interface IHoleRepo {
     editHole(id: string, newHole : HoleDB): Hole;
 
     deleteHoles(id: string): string[];
+    getHoles(id: string): Promise<HoleDB[]>
 }

@@ -1,4 +1,4 @@
-import {Teebox} from "./teebox.model";
+
 import {Loc} from "./location.model";
 
 export class Hole {
@@ -7,20 +7,24 @@ export class Hole {
 
     num: number;
 
-    locationMiddleOfFW: Loc;
+    par: number;
+
+    scoringIndex: number;
+
+    locationTeebox: Loc;
 
     locationMiddleOfGreen: Loc;
 
     course: string;
 
-    teeboxes: Teebox[];
 
-    constructor(id: string, num: number, locationMiddleOfFW: Loc, locationMiddleOfGreen: Loc, course: string, teeboxes: Teebox[]) {
+    constructor(id: string, num: number, par: number, scoringIndex: number, locationTeebox: Loc, locationMiddleOfGreen: Loc, course: string) {
         this.id = id;
         this.num = num;
-        this.locationMiddleOfFW = locationMiddleOfFW;
+        this.par = par;
+        this.scoringIndex = scoringIndex;
+        this.locationTeebox = locationTeebox;
         this.locationMiddleOfGreen = locationMiddleOfGreen;
         this.course = course;
-        this.teeboxes = teeboxes;
     }
 }
