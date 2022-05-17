@@ -6,11 +6,13 @@ import {deletePlayer} from "./deleteplayer.route";
 import {editPlayer} from "./editplayer.route";
 import {loginPlayer} from "./loginplayer.route";
 import {getAllCoursesDemo} from "./getcourses.route";
+import {getCourse} from "../course/getCourse.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
     type Query{
         getAllCoursesDemo : [CourseDemo]
+        getCourse(id: String!) : Course!
     }
     
     type Mutation{
@@ -39,6 +41,32 @@ const schema = buildSchema(`
         locationLat: String!
         locationLong: String!
     }
+    
+     type Course{
+        id: String!
+        name: String!
+        creator: String!
+        description: String!
+        location: Location!
+        holes: [Hole]!
+    }
+    
+   
+    type Hole{
+        id: String!
+        num: Int!
+        par: Int!
+        distance: Int!
+        scoringIndex: Int!
+        locationTeebox: Location!
+        locationMiddleOfGreen: Location!
+    }
+    
+    type Location{
+        lat: String!
+        long: String!
+    }
+    
 
     input AddPlayerInput{
         email:String!
@@ -69,6 +97,7 @@ const root = {
     editPlayer,
     loginPlayer,
     getAllCoursesDemo,
+    getCourse,
 }
 
 playerRouter.use('/player',  graphqlHTTP({

@@ -27,7 +27,7 @@ export class AddCourseService{
         const courseId = this.idRepo.generateId();
         holes.map(hole => {
             const holeId: string = this.idRepo.generateId();
-            this.holeRepo.addHole(new HoleDB(holeId,hole.num,hole.par,hole.scoringIndex,hole.locationTeebox.lat,hole.locationTeebox.long,hole.locationMiddleOfGreen.lat,hole.locationMiddleOfGreen.long,courseId));
+            this.holeRepo.addHole(new HoleDB(holeId,hole.num,hole.par,hole.scoringIndex,hole.distance,hole.locationTeebox.lat,hole.locationTeebox.long,hole.locationMiddleOfGreen.lat,hole.locationMiddleOfGreen.long,courseId));
         })
 
         return this.courseRepo.addCourse(new CourseDB(courseId,name,creator,description,location.lat,location.long));

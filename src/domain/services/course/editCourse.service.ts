@@ -26,7 +26,7 @@ export class EditCourseService{
         //if (holes.length !== 9 || holes.length !== 18) throw Error("Num of holes not valid!")
 
         holes.map(hole => {
-            this.holeRepo.editHole(hole.id, new HoleDB(hole.id,hole.num,hole.par,hole.scoringIndex,hole.locationTeebox.lat,hole.locationTeebox.long,hole.locationMiddleOfGreen.lat,hole.locationMiddleOfGreen.long,id));
+            this.holeRepo.editHole(hole.id, new HoleDB(hole.id,hole.num,hole.par,hole.scoringIndex,hole.distance,hole.locationTeebox.lat,hole.locationTeebox.long,hole.locationMiddleOfGreen.lat,hole.locationMiddleOfGreen.long,id));
         })
 
         return this.courseRepo.editCourse(id, new CourseDB(id,name,creator,description,location.lat,location.long));

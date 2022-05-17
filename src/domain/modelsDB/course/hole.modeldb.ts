@@ -19,6 +19,9 @@ export class HoleDB {
     scoringIndex: number;
 
     @Column()
+    distance: number;
+
+    @Column()
     locationTeeboxLat: string;
 
     @Column()
@@ -34,12 +37,13 @@ export class HoleDB {
     course: string;
 
 
-    constructor(id: string, num: number,par:number, scoringIndex: number, locationTeeboxLat: string, locationTeeboxLong: string, locationGreenLat: string, locationGreenLong: string, course: string) {
+    constructor(id: string, num: number,par:number, scoringIndex: number, distance: number, locationTeeboxLat: string, locationTeeboxLong: string, locationGreenLat: string, locationGreenLong: string, course: string) {
         this.id = id;
         this.isActive = true;
         this.num = num;
         this.par = par;
         this.scoringIndex = scoringIndex;
+        this.distance = distance;
         this.locationTeeboxLat = locationTeeboxLat;
         this.locationTeeboxLong = locationTeeboxLong;
         this.locationGreenLat = locationGreenLat;

@@ -70,6 +70,7 @@ const schema = buildSchema(`
         id: String!
         num: Int!
         par: Int!
+        distance: Int!
         scoringIndex: Int!
         locationTeebox: Location!
         locationMiddleOfGreen: Location!
@@ -100,6 +101,7 @@ const schema = buildSchema(`
         num: Int!
         par: Int!
         scoringIndex: Int!
+        distance: Int!
         locationTeebox: LocationInput!
         locationMiddleOfGreen: LocationInput!
     }
@@ -108,6 +110,7 @@ const schema = buildSchema(`
         id: String!
         num: Int!
         par: Int!
+        distance: Int!
         scoringIndex: Int!
         locationMiddleOfGreen: LocationInput!
         locationTeebox: LocationInput!

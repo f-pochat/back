@@ -25,12 +25,11 @@ export class ABMPlayerController {
     }
 
     async editPlayer(id: string, email: string, username: string, password: string, handicap: number, photo: string): Promise<void> {
-        if (username.length < 1) throw new Error("User not valid!");
-        if (password.length < 8) throw new Error("Password must be more than 7 characters!");
-
         if (!/^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(email)){
             throw Error('Invalid email');
         }
+        if (username.length < 1) throw new Error("User not valid!");
+        if (password.length < 8) throw new Error("Password must be more than 7 characters!");
 
         await this._abmPlayerService.edit(id, new Player(id, email, username, password, handicap, photo));
     }

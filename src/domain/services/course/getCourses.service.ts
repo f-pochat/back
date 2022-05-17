@@ -27,6 +27,7 @@ export class GetCoursesService{
                 num: hole.num,
                 par: hole.par,
                 scoringIndex: hole.scoringIndex,
+                distance: hole.distance,
                 locationTeebox: {lat: hole.locationTeeboxLat, long: hole.locationTeeboxLong},
                 locationMiddleOfGreen: {lat:hole.locationGreenLat, long: hole.locationGreenLong},
             })

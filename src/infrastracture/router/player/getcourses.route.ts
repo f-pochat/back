@@ -1,4 +1,5 @@
 import {GetCoursesControllerProvider} from "../../providers/player/getCoursesController.provider";
+import {Request} from "express";
 
 
 export const getAllCoursesDemo = async ( req: Request): Promise<any[]> => {
