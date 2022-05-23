@@ -7,6 +7,7 @@ import {editPlayer} from "./editplayer.route";
 import {loginPlayer} from "./loginplayer.route";
 import {getAllCoursesDemo} from "./getcourses.route";
 import {getCourse} from "../course/getCourse.route";
+import {saveRound} from "./round/saveround.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
@@ -20,6 +21,7 @@ const schema = buildSchema(`
         deletePlayer(id: String!) : ID
         editPlayer(input: EditPlayerInput) : Player
         loginPlayer(input: LoginPlayerInput) : Token
+        saveRound(input: RoundInput) : Round
     }
     
     type Token{
@@ -67,6 +69,21 @@ const schema = buildSchema(`
         long: String!
     }
     
+    type Round{
+        id: String!
+        playerId: String!
+        courseId: String!
+        playDate: String!
+        playedHoles: [PlayedHole]
+    }
+    
+    type PlayedHole {
+        num: Int!
+        score: Int!
+        putts: Int!
+        fairway: String!
+    }
+    
 
     input AddPlayerInput{
         email:String!
@@ -88,6 +105,19 @@ const schema = buildSchema(`
         password: String!
     }
     
+    input RoundInput{
+        playerId: String!
+        courseId: String!
+        playedHoles: [PlayedHoleInput]
+    }
+    
+    input PlayedHoleInput {
+        num: Int!
+        score: Int!
+        putts: Int!
+        fairway: String!
+    }
+    
 `)
 
 const root = {
@@ -98,6 +128,7 @@ const root = {
     loginPlayer,
     getAllCoursesDemo,
     getCourse,
+    saveRound
 }
 
 playerRouter.use('/player',  graphqlHTTP({
