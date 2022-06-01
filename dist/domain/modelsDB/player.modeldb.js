@@ -12,26 +12,46 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlayerDB = void 0;
 const typeorm_1 = require("typeorm");
 let PlayerDB = class PlayerDB {
-    constructor(email, username, password) {
+    constructor(id, email, isActive, fullname, password, handicap, photo) {
+        this.id = id;
         this.email = email;
-        this.username = username;
+        this.isActive = isActive;
+        this.fullname = fullname;
         this.password = password;
+        this.handicap = handicap;
+        this.photo = photo;
     }
 };
 __decorate([
     (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
-], PlayerDB.prototype, "email", void 0);
+], PlayerDB.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], PlayerDB.prototype, "username", void 0);
+], PlayerDB.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Boolean)
+], PlayerDB.prototype, "isActive", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], PlayerDB.prototype, "fullname", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], PlayerDB.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true, type: 'real' }),
+    __metadata("design:type", String)
+], PlayerDB.prototype, "handicap", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], PlayerDB.prototype, "photo", void 0);
 PlayerDB = __decorate([
     (0, typeorm_1.Entity)(),
-    __metadata("design:paramtypes", [String, String, String])
+    __metadata("design:paramtypes", [String, String, Boolean, String, String, String, String])
 ], PlayerDB);
 exports.PlayerDB = PlayerDB;

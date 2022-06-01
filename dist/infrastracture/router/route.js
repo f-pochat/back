@@ -13,11 +13,14 @@ const addCourse_route_1 = require("./course/addCourse.route");
 const addAdmin_route_1 = require("./admin/addAdmin.route");
 const deleteCourse_route_1 = require("./course/deleteCourse.route");
 const getCourses_route_1 = require("./course/getCourses.route");
+const getCourse_route_1 = require("./course/getCourse.route");
+const editCourse_route_1 = require("./course/editCourse.route");
 const router = express_1.default.Router();
 exports.router = router;
 const schema = (0, graphql_1.buildSchema)(`
     type Query{
         getCourses : [Course]
+        getCourse(id: String!) : Course
     }
     
     type Mutation{
@@ -26,7 +29,7 @@ const schema = (0, graphql_1.buildSchema)(`
         editAdmin(input: EditAdminInput): Admin
         addCourse(input: CourseInput) : Course
         deleteCourse(id: String) : ID
-        
+        editCourse(input: EditCourseInput) : Course
     }
     
     type Token{
@@ -70,19 +73,11 @@ const schema = (0, graphql_1.buildSchema)(`
     type Hole{
         id: String!
         num: Int!
-        locationMiddleOfGreen: Location!
-        locationMiddleOfFW: Location!
-        course: String!
-        teeboxes: [Teebox]!
-    }
-    
-    type Teebox{
-        id: String!
-        name:String!
-        color: String!
         par: Int!
+        distance: Int!
         scoringIndex: Int!
-        locationTeeBox: Location!
+        locationTeebox: Location!
+        locationMiddleOfGreen: Location!
     }
     
     type Location{
@@ -90,7 +85,14 @@ const schema = (0, graphql_1.buildSchema)(`
         long: String!
     }
     
-    
+    input EditCourseInput{
+        id: String!
+        name: String!
+        creator: String!
+        description: String!
+        location: LocationInput!
+        holes: [EditHoleInput]!
+    }
     
     input CourseInput{
         name: String!
@@ -101,17 +103,21 @@ const schema = (0, graphql_1.buildSchema)(`
     }
     input HoleInput{
         num: Int!
-        locationMiddleOfGreen: LocationInput!
-        locationMiddleOfFW: LocationInput!
-        teeboxes: [TeeboxInput]!
-    }
-    
-    input TeeboxInput{
-        name: String!
-        color: String!
         par: Int!
         scoringIndex: Int!
-        locationTeeBox: LocationInput!
+        distance: Int!
+        locationTeebox: LocationInput!
+        locationMiddleOfGreen: LocationInput!
+    }
+    
+    input EditHoleInput{
+        id: String!
+        num: Int!
+        par: Int!
+        distance: Int!
+        scoringIndex: Int!
+        locationMiddleOfGreen: LocationInput!
+        locationTeebox: LocationInput!
     }
     
     input LocationInput{
@@ -128,6 +134,8 @@ const root = {
     addCourse: addCourse_route_1.addCourse,
     deleteCourse: deleteCourse_route_1.deleteCourse,
     getCourses: getCourses_route_1.getCourses,
+    getCourse: getCourse_route_1.getCourse,
+    editCourse: editCourse_route_1.editCourse,
 };
 router.use('/admin', (0, express_graphql_1.graphqlHTTP)({
     schema: schema,

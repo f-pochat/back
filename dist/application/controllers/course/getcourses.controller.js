@@ -14,9 +14,14 @@ class GetcoursesController {
     constructor(getCourseService) {
         this.getCoursesService = getCourseService;
     }
-    getCourse() {
+    getCourses() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.getCoursesService.getCourses();
+        });
+    }
+    getCourse(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.getCoursesService.getCourse(id);
         });
     }
 }

@@ -13,7 +13,6 @@ exports.HoleDAO = void 0;
 // @ts-ignore
 const typeorm_1 = require("typeorm");
 const hole_modeldb_1 = require("../../../domain/modelsDB/course/hole.modeldb");
-const deleteCourseController_provider_1 = require("../../providers/course/deleteCourseController.provider");
 class HoleDAO {
     constructor() {
         this.repo = (0, typeorm_1.getRepository)(hole_modeldb_1.HoleDB, "db");
@@ -33,8 +32,19 @@ class HoleDAO {
                 holes.push(r.id);
                 this.repo.update(r.id, { isActive: false });
             });
-            yield deleteCourseController_provider_1.DeleteCourseControllerProvider.getController().deleteTeebox(holes);
         });
+        this.getHoles = (id) => __awaiter(this, void 0, void 0, function* () {
+            return this.repo.find({
+                where: {
+                    isActive: true,
+                    course: id,
+                }
+            });
+        });
+    }
+    // @ts-ignore
+    editHole(id, newHole) {
+        this.repo.update(id, newHole).then(r => r);
     }
 }
 exports.HoleDAO = HoleDAO;

@@ -11,19 +11,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteCourseService = void 0;
 class DeleteCourseService {
-    constructor(courseRepo, holeRepo, teeboxRepo) {
+    constructor(courseRepo, holeRepo) {
         this.deleteCourse = (id) => __awaiter(this, void 0, void 0, function* () {
             this.courseRepo.deleteCourse(id);
         });
         this.deleteHoles = (id) => __awaiter(this, void 0, void 0, function* () {
             this.holeRepo.deleteHoles(id);
         });
-        this.deleteTeeboxes = (holes) => __awaiter(this, void 0, void 0, function* () {
-            this.teeboxRepo.deleteTeeboxes(holes);
-        });
         this.courseRepo = courseRepo;
         this.holeRepo = holeRepo;
-        this.teeboxRepo = teeboxRepo;
     }
 }
 exports.DeleteCourseService = DeleteCourseService;

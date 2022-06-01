@@ -24,10 +24,5 @@ class DeleteCourseController {
             return yield this.deleteCourseService.deleteHoles(id);
         });
     }
-    deleteTeebox(holes) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield this.deleteCourseService.deleteTeeboxes(holes);
-        });
-    }
 }
 exports.DeleteCourseController = DeleteCourseController;

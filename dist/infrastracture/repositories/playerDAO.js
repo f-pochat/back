@@ -24,9 +24,23 @@ class PlayerDAO {
             // @ts-ignore
             return yield this.repo.findOne(
             // @ts-ignore
-            { where: { email: email }
+            { where: {
+                    email: email,
+                    isActive: true,
+                }
             });
         });
+    }
+    deletePlayer(id) {
+        // @ts-ignore
+        this.repo.update({
+            id: id,
+        }, {
+            isActive: false,
+        }).then(r => r);
+    }
+    editPlayer(id, player) {
+        this.repo.update(id, player).then(r => r);
     }
 }
 exports.PlayerDAO = PlayerDAO;

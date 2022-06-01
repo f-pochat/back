@@ -12,12 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HoleDB = void 0;
 const typeorm_1 = require("typeorm");
 let HoleDB = class HoleDB {
-    constructor(id, num, locationMidFWLat, locationMidFWLong, locationGreenLat, locationGreenLong, course) {
+    constructor(id, num, par, scoringIndex, distance, locationTeeboxLat, locationTeeboxLong, locationGreenLat, locationGreenLong, course) {
         this.id = id;
         this.isActive = true;
         this.num = num;
-        this.locationMidFWLat = locationMidFWLat;
-        this.locationMidFWLong = locationMidFWLong;
+        this.par = par;
+        this.scoringIndex = scoringIndex;
+        this.distance = distance;
+        this.locationTeeboxLat = locationTeeboxLat;
+        this.locationTeeboxLong = locationTeeboxLong;
         this.locationGreenLat = locationGreenLat;
         this.locationGreenLong = locationGreenLong;
         this.course = course;
@@ -37,12 +40,24 @@ __decorate([
 ], HoleDB.prototype, "num", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], HoleDB.prototype, "locationMidFWLat", void 0);
+    __metadata("design:type", Number)
+], HoleDB.prototype, "par", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], HoleDB.prototype, "scoringIndex", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], HoleDB.prototype, "distance", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], HoleDB.prototype, "locationMidFWLong", void 0);
+], HoleDB.prototype, "locationTeeboxLat", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], HoleDB.prototype, "locationTeeboxLong", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
@@ -57,6 +72,6 @@ __decorate([
 ], HoleDB.prototype, "course", void 0);
 HoleDB = __decorate([
     (0, typeorm_1.Entity)(),
-    __metadata("design:paramtypes", [String, Number, String, String, String, String, String])
+    __metadata("design:paramtypes", [String, Number, Number, Number, Number, String, String, String, String, String])
 ], HoleDB);
 exports.HoleDB = HoleDB;

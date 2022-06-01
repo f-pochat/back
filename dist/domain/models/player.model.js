@@ -2,10 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Player = void 0;
 class Player {
-    constructor(email, username, password) {
+    constructor(id, email, fullname, password, handicap, photo) {
+        this.id = id;
         this.email = email;
-        this.username = username;
+        this.fullname = fullname;
         this.password = password;
+        this.handicap = handicap;
+        this.photo = photo;
     }
 }
 exports.Player = Player;

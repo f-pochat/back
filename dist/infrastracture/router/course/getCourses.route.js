@@ -11,9 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCourses = void 0;
 const getCourseController_provider_1 = require("../../providers/course/getCourseController.provider");
-const getCourses = (args, req) => __awaiter(void 0, void 0, void 0, function* () {
+const getCourses = (req) => __awaiter(void 0, void 0, void 0, function* () {
     /*const token: string = <string>req.headers['authorization'];
     const username: string = verifyAdmin(token.substring(7));*/
-    return yield getCourseController_provider_1.GetCoursesControllerProvider.getController().getCourse();
+    return yield getCourseController_provider_1.GetCoursesControllerProvider.getController().getCourses();
 });
 exports.getCourses = getCourses;

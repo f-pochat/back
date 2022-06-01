@@ -12,9 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddCourseService = void 0;
 const course_modeldb_1 = require("../../modelsDB/course/course.modeldb");
 const hole_modeldb_1 = require("../../modelsDB/course/hole.modeldb");
-const teebox_modeldb_1 = require("../../modelsDB/course/teebox.modeldb");
 class AddCourseService {
-    constructor(courseRepo, idRepo, holeRepo, teeboxRepo) {
+    constructor(courseRepo, idRepo, holeRepo) {
         this.addCourse = (name, creator, description, location, holes) => __awaiter(this, void 0, void 0, function* () {
             if (name.length < 1)
                 throw Error("Name not valid!");
@@ -25,16 +24,12 @@ class AddCourseService {
             const courseId = this.idRepo.generateId();
             holes.map(hole => {
                 const holeId = this.idRepo.generateId();
-                this.holeRepo.addHole(new hole_modeldb_1.HoleDB(holeId, hole.num, hole.locationMiddleOfFW.lat, hole.locationMiddleOfFW.long, hole.locationMiddleOfGreen.lat, hole.locationMiddleOfGreen.long, courseId));
-                hole.teeboxes.map(t => {
-                    this.teeboxRepo.addTeebox(new teebox_modeldb_1.TeeboxDB(this.idRepo.generateId(), t.name, t.color, t.locationTeeBox.lat, t.locationTeeBox.long, t.par, t.scoringIndex, holeId));
-                });
+                this.holeRepo.addHole(new hole_modeldb_1.HoleDB(holeId, hole.num, hole.par, hole.scoringIndex, hole.distance, hole.locationTeebox.lat, hole.locationTeebox.long, hole.locationMiddleOfGreen.lat, hole.locationMiddleOfGreen.long, courseId));
             });
             return this.courseRepo.addCourse(new course_modeldb_1.CourseDB(courseId, name, creator, description, location.lat, location.long));
         });
         this.courseRepo = courseRepo;
         this.holeRepo = holeRepo;
-        this.teeboxRepo = teeboxRepo;
         this.idRepo = idRepo;
     }
 }

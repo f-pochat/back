@@ -27,12 +27,42 @@ class CourseDAO {
             deleteCourseController_provider_1.DeleteCourseControllerProvider.getController().deleteHoles(id).then(r => r);
         };
     }
+    //@ts-ignore
+    editCourse(id, course) {
+        this.repo.update(id, course).then(r => r);
+    }
     getCourses() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.repo.find({
                 where: {
                     isActive: true,
                 }
+            });
+        });
+    }
+    getCourse(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // @ts-ignore
+            return this.repo.findOne({
+                where: {
+                    id: id,
+                    isActive: true,
+                }
+            });
+        });
+    }
+    getAllCoursesDemo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repo.find({
+                select: {
+                    id: true,
+                    name: true,
+                    locationLat: true,
+                    locationLong: true,
+                },
+                where: {
+                    isActive: true,
+                },
             });
         });
     }
