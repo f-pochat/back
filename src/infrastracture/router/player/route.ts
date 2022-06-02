@@ -20,12 +20,12 @@ const schema = buildSchema(`
         addPlayer(input: AddPlayerInput) : Player
         deletePlayer(id: String!) : ID
         editPlayer(input: EditPlayerInput) : Player
-        loginPlayer(input: LoginPlayerInput) : String!
+        loginPlayer(input: LoginPlayerInput) : UserID
         saveRound(input: RoundInput) : Round
     }
     
-    type Token{
-        token: String
+    type UserID{
+        id: String
     }
 
     type Player{
