@@ -40,4 +40,17 @@ export class PlayerDAO implements IPlayerRepo {
     editPlayer(id: string, player: PlayerDB): void {
         this.repo.update(id, player).then(r => r);
     }
+
+    async getPlayer(id: String): Promise<PlayerDB> {
+        console.log('r');
+
+        return await this.repo.findOne(
+            // @ts-ignore
+            { where:{
+                    id: id,
+                    isActive: true,
+                }
+            }
+        );
+    }
 }

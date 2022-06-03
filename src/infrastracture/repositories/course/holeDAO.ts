@@ -1,5 +1,5 @@
 // @ts-ignore
-import {getRepository} from "typeorm";
+import {getConnection, getRepository} from "typeorm";
 import {ICourseRepo} from "../../../domain/repositories/course/course.repository";
 import {IHoleRepo} from "../../../domain/repositories/course/hole.repository";
 import {HoleDB} from "../../../domain/modelsDB/course/hole.modeldb";
@@ -28,10 +28,34 @@ export class HoleDAO implements IHoleRepo {
         });
 
         const holes: string[] = [];
-        holesPr.map(r => {
-            holes.push(r.id);
-            this.repo.update(r.id,{isActive:false})
-        });
+
+        // get a connection and create a new query runner
+        const connection = getConnection();
+        const queryRunner = connection.createQueryRunner();
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+
+        try {
+
+            // execute some operations on this transaction:
+            holesPr.map(r => {
+                holes.push(r.id);
+                this.repo.update(r.id,{isActive:false})
+            });
+
+            // commit transaction now:
+            await queryRunner.commitTransaction();
+
+        } catch (err) {
+
+            // since we have errors let's rollback changes we made
+            await queryRunner.rollbackTransaction();
+
+        } finally {
+
+            // you need to release query runner which is manually created:
+            await queryRunner.release();
+        }
     }
 
     getHoles = async(id: string): Promise<HoleDB[]> => {

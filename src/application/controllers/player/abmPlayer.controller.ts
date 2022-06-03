@@ -33,4 +33,8 @@ export class ABMPlayerController {
 
         await this._abmPlayerService.edit(id, new Player(id, email, username, password, handicap, photo));
     }
+
+    async getPlayer(id: string): Promise<Player> {
+        return this._abmPlayerService.getPlayer(id);
+    }
 }

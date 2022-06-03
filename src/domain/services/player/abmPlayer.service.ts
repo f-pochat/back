@@ -42,4 +42,8 @@ export class ABMPlayerService {
 
         this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, hashedPassword, player.handicap.toString(), player.photo));
     }
+
+    getPlayer = async(id: string): Promise<Player> => {
+        return this.playerRepo.getPlayer(id);
+    }
 }

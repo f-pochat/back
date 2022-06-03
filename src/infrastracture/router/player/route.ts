@@ -14,6 +14,7 @@ const schema = buildSchema(`
     type Query{
         getAllCoursesDemo : [CourseDemo]
         getCourse(id: String!) : Course!
+        getPlayerInfo(id: String!) : Player!
     }
     
     type Mutation{

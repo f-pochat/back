@@ -6,4 +6,5 @@ export interface IPlayerRepo{
     deletePlayer(email: string): void;
     getByEmail(email: String): Promise<Player>;
     editPlayer(id: string, player: PlayerDB): void;
+    getPlayer(id: string): Promise<Player>;
 }
