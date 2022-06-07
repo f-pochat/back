@@ -13,4 +13,8 @@ export class RoundController{
 
         return await this._roundService.saveRound(courseId,userId,playedHoles);
     }
+
+    async getRoundsByPlayer(id: string): Promise<any[]>{
+        return await this._roundService.getRoundsByPlayer(id);
+    }
 }

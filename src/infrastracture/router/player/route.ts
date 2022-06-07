@@ -8,6 +8,9 @@ import {loginPlayer} from "./loginplayer.route";
 import {getAllCoursesDemo} from "./getcourses.route";
 import {getCourse} from "../course/getCourse.route";
 import {saveRound} from "./round/saveround.route";
+import {addReview} from "./review/addreview.route";
+import {getReviewsByCourse} from "./review/getReviewsByCourse.route";
+import {getRoundsByPlayer} from "./round/getRoundsByPlayer.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
@@ -15,6 +18,8 @@ const schema = buildSchema(`
         getAllCoursesDemo : [CourseDemo]
         getCourse(id: String!) : Course!
         getPlayerInfo(id: String!) : Player!
+        getReviewsByCourse(id: String!) : [Review]
+        getRoundsByPlayer(id: String!) : [Round]
     }
     
     type Mutation{
@@ -23,6 +28,7 @@ const schema = buildSchema(`
         editPlayer(input: EditPlayerInput) : Player
         loginPlayer(input: LoginPlayerInput) : UserID
         saveRound(input: RoundInput) : Round
+        addReview(input: ReviewInput) : Review
     }
     
     type UserID{
@@ -85,6 +91,13 @@ const schema = buildSchema(`
         fairway: String!
     }
     
+    type Review {
+        id: String!
+        ratingNumber: Int!
+        ratingText: String!
+        courseId: String!
+        userId: String!
+    }
 
     input AddPlayerInput{
         email:String!
@@ -119,6 +132,14 @@ const schema = buildSchema(`
         fairway: String!
     }
     
+     input ReviewInput{
+        ratingNumber: Int!
+        ratingText: String!
+        courseId: String!
+        userId: String!
+    }
+    
+    
 `)
 
 const root = {
@@ -129,7 +150,10 @@ const root = {
     loginPlayer,
     getAllCoursesDemo,
     getCourse,
-    saveRound
+    saveRound,
+    addReview,
+    getReviewsByCourse,
+    getRoundsByPlayer,
 }
 
 playerRouter.use('/player',  graphqlHTTP({

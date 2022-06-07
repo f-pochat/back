@@ -14,24 +14,31 @@ const loginplayer_route_1 = require("./loginplayer.route");
 const getcourses_route_1 = require("./getcourses.route");
 const getCourse_route_1 = require("../course/getCourse.route");
 const saveround_route_1 = require("./round/saveround.route");
+const addreview_route_1 = require("./review/addreview.route");
+const getReviewsByCourse_route_1 = require("./review/getReviewsByCourse.route");
+const getRoundsByPlayer_route_1 = require("./round/getRoundsByPlayer.route");
 const playerRouter = express_1.default.Router();
 exports.playerRouter = playerRouter;
 const schema = (0, graphql_1.buildSchema)(`
     type Query{
         getAllCoursesDemo : [CourseDemo]
         getCourse(id: String!) : Course!
+        getPlayerInfo(id: String!) : Player!
+        getReviewsByCourse(id: String!) : [Review]
+        getRoundsByPlayer(id: String!) : [Round]
     }
     
     type Mutation{
         addPlayer(input: AddPlayerInput) : Player
         deletePlayer(id: String!) : ID
         editPlayer(input: EditPlayerInput) : Player
-        loginPlayer(input: LoginPlayerInput) : Token
+        loginPlayer(input: LoginPlayerInput) : UserID
         saveRound(input: RoundInput) : Round
+        addReview(input: ReviewInput) : Review
     }
     
-    type Token{
-        token: String
+    type UserID{
+        id: String
     }
 
     type Player{
@@ -90,6 +97,13 @@ const schema = (0, graphql_1.buildSchema)(`
         fairway: String!
     }
     
+    type Review {
+        id: String!
+        ratingNumber: Int!
+        ratingText: String!
+        courseId: String!
+        userId: String!
+    }
 
     input AddPlayerInput{
         email:String!
@@ -124,6 +138,14 @@ const schema = (0, graphql_1.buildSchema)(`
         fairway: String!
     }
     
+     input ReviewInput{
+        ratingNumber: Int!
+        ratingText: String!
+        courseId: String!
+        userId: String!
+    }
+    
+    
 `);
 const root = {
     // @ts-ignore
@@ -133,7 +155,10 @@ const root = {
     loginPlayer: loginplayer_route_1.loginPlayer,
     getAllCoursesDemo: getcourses_route_1.getAllCoursesDemo,
     getCourse: getCourse_route_1.getCourse,
-    saveRound: saveround_route_1.saveRound
+    saveRound: saveround_route_1.saveRound,
+    addReview: addreview_route_1.addReview,
+    getReviewsByCourse: getReviewsByCourse_route_1.getReviewsByCourse,
+    getRoundsByPlayer: getRoundsByPlayer_route_1.getRoundsByPlayer,
 };
 playerRouter.use('/player', (0, express_graphql_1.graphqlHTTP)({
     schema: schema,

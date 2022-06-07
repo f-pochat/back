@@ -42,5 +42,17 @@ class PlayerDAO {
     editPlayer(id, player) {
         this.repo.update(id, player).then(r => r);
     }
+    getPlayer(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //@ts-ignore
+            return yield this.repo.findOne(
+            // @ts-ignore
+            { where: {
+                    id: id,
+                    isActive: true,
+                }
+            });
+        });
+    }
 }
 exports.PlayerDAO = PlayerDAO;

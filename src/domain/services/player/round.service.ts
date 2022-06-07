@@ -1,4 +1,5 @@
 import {IRoundRepo} from "../../repositories/round.repository";
+import {Round} from "../../models/Round.model";
 
 
 export class RoundService {
@@ -17,5 +18,14 @@ export class RoundService {
         */
 
         return this.roundRepo.saveRound(courseId,userId,new Date(Date.now()),playedHoles);
+    }
+
+    getRoundsByPlayer = async(id: string): Promise<any[]> => {
+        const rounds = await this.roundRepo.getRoundsByPlayer(id);
+        const allRoundsByPlayer: Round[] = [];
+        rounds.map(r => {
+            allRoundsByPlayer.push(new Round(r._id,r.userId, r.courseId, r.playedAt, r.playedHoles))
+        })
+        return allRoundsByPlayer;
     }
 }

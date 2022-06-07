@@ -15,6 +15,7 @@ const hole_modeldb_1 = require("../../domain/modelsDB/course/hole.modeldb");
 const course_modeldb_1 = require("../../domain/modelsDB/course/course.modeldb");
 const admin_modeldb_1 = require("../../domain/modelsDB/admin.modeldb");
 const player_modeldb_1 = require("../../domain/modelsDB/player.modeldb");
+const review_modeldb_1 = require("../../domain/modelsDB/course/review.modeldb");
 const mongoose = require("mongoose");
 const ck = require('ckey');
 const runDbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -32,6 +33,7 @@ const runDbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
             course_modeldb_1.CourseDB,
             hole_modeldb_1.HoleDB,
             player_modeldb_1.PlayerDB,
+            review_modeldb_1.ReviewDB
         ],
     });
     mongoose.connect(`mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`, {

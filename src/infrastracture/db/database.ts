@@ -3,6 +3,7 @@ import {HoleDB} from "../../domain/modelsDB/course/hole.modeldb";
 import {CourseDB} from "../../domain/modelsDB/course/course.modeldb";
 import {AdminDB} from "../../domain/modelsDB/admin.modeldb";
 import {PlayerDB} from "../../domain/modelsDB/player.modeldb";
+import {ReviewDB} from "../../domain/modelsDB/course/review.modeldb";
 const mongoose = require("mongoose");
 const ck = require('ckey');
 
@@ -21,6 +22,7 @@ const runDbConnection = async (): Promise<void> => {
             CourseDB,
             HoleDB,
             PlayerDB,
+            ReviewDB
         ],
     })
 

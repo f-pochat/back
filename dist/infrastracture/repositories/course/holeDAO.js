@@ -28,10 +28,28 @@ class HoleDAO {
                 }
             });
             const holes = [];
-            holesPr.map(r => {
-                holes.push(r.id);
-                this.repo.update(r.id, { isActive: false });
-            });
+            // get a connection and create a new query runner
+            const connection = (0, typeorm_1.getConnection)();
+            const queryRunner = connection.createQueryRunner();
+            yield queryRunner.connect();
+            yield queryRunner.startTransaction();
+            try {
+                // execute some operations on this transaction:
+                holesPr.map(r => {
+                    holes.push(r.id);
+                    this.repo.update(r.id, { isActive: false });
+                });
+                // commit transaction now:
+                yield queryRunner.commitTransaction();
+            }
+            catch (err) {
+                // since we have errors let's rollback changes we made
+                yield queryRunner.rollbackTransaction();
+            }
+            finally {
+                // you need to release query runner which is manually created:
+                yield queryRunner.release();
+            }
         });
         this.getHoles = (id) => __awaiter(this, void 0, void 0, function* () {
             return this.repo.find({

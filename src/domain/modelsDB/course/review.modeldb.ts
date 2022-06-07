@@ -1,7 +1,7 @@
-import {Column, Entity, ManyToOne, PrimaryColumn} from "typeorm";
+import {Column, Entity,  PrimaryColumn} from "typeorm";
 
 @Entity()
-export class RatingDB{
+export class ReviewDB{
     @PrimaryColumn()
     id: string;
 
@@ -9,7 +9,7 @@ export class RatingDB{
     ratingNumber: number;
 
     @Column()
-    ratingText: number;
+    ratingText: string;
 
     @Column()
     userId: string;
@@ -18,7 +18,7 @@ export class RatingDB{
     courseId: string;
 
 
-    constructor(id: string, ratingNumber: number, ratingText: number, userId: string, courseId: string) {
+    constructor(id: string, ratingNumber: number, ratingText: string,courseId: string, userId: string) {
         this.id = id;
         this.ratingNumber = ratingNumber;
         this.ratingText = ratingText;
