@@ -13,7 +13,7 @@ app.use(playerRouter);
 const startServer = (): void => {
 
     const PORT = app.get('port')
-    app.listen(4000);
+    app.listen(8080);
     connect();
 };
 
