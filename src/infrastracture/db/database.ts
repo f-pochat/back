@@ -9,13 +9,15 @@ const ck = require('ckey');
 
 const runDbConnection = async (): Promise<void> => {
     const connection = createConnection({
+        // host=golftrack.postgres.database.azure.com port=5432 dbname={your_database} user=fedepoch password={your_password} sslmode=require
         name: "db",
         type:"postgres",
-        host:"localhost",
+        host:"golftrack.postgres.database.azure.com",
         port: 5432,
-        username: "postgres",
-        password: "password",
-        database: "golfTrack",
+        username: "fedepoch",
+        password: ck.POSTGRES_PASSWORD,
+        database: "postgres",
+        ssl:true,
         synchronize: true,
         entities: [
             AdminDB,
