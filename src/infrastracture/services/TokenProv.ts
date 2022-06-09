@@ -3,6 +3,10 @@ import {ITokenProv} from "../../domain/repositories/token.repository";
 
 export class TokenProv implements ITokenProv{
     login(user: string, role: string): string {
-        return jwt.sign({_user: user, _role:role},'golftrack')
+        return jwt.sign({_user: user, _role:role},'golftrack');
+    }
+
+    loginPlayer(user: string, id: string): string {
+        return jwt.sign({_user: user, _id: id}, 'golftrack');
     }
 }
