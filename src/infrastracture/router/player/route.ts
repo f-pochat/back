@@ -33,6 +33,7 @@ const schema = buildSchema(`
     
     type Token{
         token: String
+        id: String
     }
 
     type Player{
@@ -159,7 +160,6 @@ const root = {
 playerRouter.use('/player',  graphqlHTTP({
     schema:schema,
     rootValue: root,
-    graphiql: true,
 }));
 
 export {playerRouter}

@@ -8,7 +8,9 @@ export const loginPlayer = async ({input}: any, req: Request): Promise<any> => {
 
     //const token: string = <string>req.headers['authorization'];
     //const username: string = verifyAdmin(token.substring(7));
+    const payload = await LoginPlayerControllerProvider.getController().loginPlayer(email, password);
     return {
-        token: LoginPlayerControllerProvider.getController().loginPlayer(email, password),
+        token: payload.token,
+        id: payload.id,
     };
 }
