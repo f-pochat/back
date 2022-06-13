@@ -17,13 +17,16 @@ export class LoginPlayerService {
         this.tokenProv = tokenProvider;
     }
 
-    login = async(email:string, password: string):Promise<String> => {
+    login = async(email:string, password: string):Promise<any> => {
 
         const player: Player = await this.playerRepo.getByEmail(email);
         if (!player) throw Error("Email doesn't exists!");
 
         if(!this.passwordHasher.compare(player.password,password)) throw Error("Password incorrect!");
         // @ts-ignore
-        return this.tokenProv.loginPlayer(email,player.id);
+        return {
+            token: this.tokenProv.loginPlayer(email,player.id),
+            id: player.id,
+        };
     }
 }

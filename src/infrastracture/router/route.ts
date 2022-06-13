@@ -138,7 +138,6 @@ const root = {
 router.use('/admin',  graphqlHTTP({
     schema:schema,
     rootValue: root,
-    graphiql: true,
 }));
 
 export {router}

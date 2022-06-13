@@ -9,7 +9,7 @@ export class LoginPlayerController{
         this._loginPlayerService = loginPlayerService;
     }
 
-    async loginPlayer(email: string, password: string): Promise<String>{
+    async loginPlayer(email: string, password: string): Promise<any>{
         if (password.length < 8) throw new Error("Password must be more than 7 characters!");
 
         if (!/^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(email)){
