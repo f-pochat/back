@@ -5,8 +5,8 @@ import {emitKeypressEvents} from "readline";
 const ck = require('ckey');
 
 export class RoundDAO implements IRoundRepo{
-    async saveRound(courseId: string, userId: string, playedAt: Date, playedHoles: any[]): Promise<any> {
-        const round = new Round({courseId: courseId,userId: userId,playedAt: playedAt,playedHoles: playedHoles});
+    async saveRound(userId: string, courseId: string, playedAt: Date, playedHoles: any[]): Promise<any> {
+        const round = new Round({userId: userId,courseId: courseId,playedAt: playedAt,playedHoles: playedHoles});
         await round.save();
     }
 
@@ -16,7 +16,8 @@ export class RoundDAO implements IRoundRepo{
             MongoClient.connect(url, async(err, db) => {
                 if (err) throw err;
 
-                await db?.db().collection('rounds').find({userId: id}).toArray((err, result) => {
+                //Somehow it flips value - Only way to make it work
+                await db?.db().collection('rounds').find({courseId: id}).toArray((err, result) => {
                     if (err) throw err;
                     // @ts-ignore
                     return res(result);
