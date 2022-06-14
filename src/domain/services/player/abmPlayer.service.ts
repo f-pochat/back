@@ -36,11 +36,13 @@ export class ABMPlayerService {
     edit = async(id: string, player: Player):Promise<void> => {
 
         const duplicatePlayerEmail: Player = await this.playerRepo.getByEmail(player.email);
-        if (duplicatePlayerEmail) throw Error("Email already exists!");
 
         const hashedPassword = this.passwordHasher.hash(player.password);
-
-        this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, hashedPassword, player.handicap.toString(), player.photo));
+        if (duplicatePlayerEmail.password === hashedPassword){
+            this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, duplicatePlayerEmail.password, player.handicap.toString(), player.photo));
+        }else{
+            this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, hashedPassword, player.handicap.toString(), player.photo));
+        }
     }
 
     getPlayer = async(id: string): Promise<Player> => {

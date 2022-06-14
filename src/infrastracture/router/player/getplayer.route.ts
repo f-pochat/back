@@ -3,7 +3,7 @@ import {ABMPlayerControllerProvider} from "../../providers/player/abmPlayerContr
 import {Player} from "../../../domain/models/player.model";
 import {verifyTokenPlayer} from "./verifyTokenPlayer";
 
-export const getCourse = async ({id}: any, req: Request): Promise<Player> => {
+export const getPlayerInfo = async ({id}: any, req: Request): Promise<Player> => {
     // @ts-ignore
     //const token: string = <string>req.headers['authorization'];
     //const username: string = verifyTokenPlayer(token.substring(7));

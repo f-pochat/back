@@ -11,6 +11,7 @@ import {saveRound} from "./round/saveround.route";
 import {addReview} from "./review/addreview.route";
 import {getReviewsByCourse} from "./review/getReviewsByCourse.route";
 import {getRoundsByPlayer} from "./round/getRoundsByPlayer.route";
+import {getPlayerInfo} from "./getplayer.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
@@ -155,6 +156,7 @@ const root = {
     addReview,
     getReviewsByCourse,
     getRoundsByPlayer,
+    getPlayerInfo,
 }
 
 playerRouter.use('/player',  graphqlHTTP({
