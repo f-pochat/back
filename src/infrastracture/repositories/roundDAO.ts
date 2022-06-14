@@ -5,11 +5,12 @@ import {emitKeypressEvents} from "readline";
 const ck = require('ckey');
 
 export class RoundDAO implements IRoundRepo{
-    async saveRound(courseId: string, userId: string, playedAt: Date, playedHoles: any[]): Promise<any> {
-        const round = new Round({courseId: courseId,userId: userId,playedAt: playedAt,playedHoles: playedHoles});
+    async saveRound(userId: string, courseId: string, playedAt: Date, playedHoles: any[]): Promise<any> {
+        const round = new Round({userId: userId,courseId: courseId,playedAt: playedAt,playedHoles: playedHoles});
         await round.save();
     }
 
+    //Get rounds by the id of the player
     async getRoundsByPlayer(id: string) : Promise<any[]> {
         const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`
         return new Promise((res, rej) => {
