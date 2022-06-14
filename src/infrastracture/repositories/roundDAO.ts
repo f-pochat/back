@@ -10,6 +10,7 @@ export class RoundDAO implements IRoundRepo{
         await round.save();
     }
 
+    //Get rounds by the id of the player
     async getRoundsByPlayer(id: string) : Promise<any[]> {
         const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`
         return new Promise((res, rej) => {
