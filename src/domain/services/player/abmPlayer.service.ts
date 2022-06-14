@@ -38,7 +38,7 @@ export class ABMPlayerService {
         const duplicatePlayerEmail: Player = await this.playerRepo.getByEmail(player.email);
 
         const hashedPassword = this.passwordHasher.hash(player.password);
-        if (duplicatePlayerEmail.password === hashedPassword){
+        if (duplicatePlayerEmail.password === hashedPassword || duplicatePlayerEmail.password === player.password){
             this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, duplicatePlayerEmail.password, player.handicap.toString(), player.photo));
         }else{
             this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, hashedPassword, player.handicap.toString(), player.photo));
