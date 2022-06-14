@@ -16,8 +16,7 @@ export class RoundDAO implements IRoundRepo{
             MongoClient.connect(url, async(err, db) => {
                 if (err) throw err;
 
-                //Somehow it flips value - Only way to make it work
-                await db?.db().collection('rounds').find({courseId: id}).toArray((err, result) => {
+                await db?.db().collection('rounds').find({userId: id}).toArray((err, result) => {
                     if (err) throw err;
                     // @ts-ignore
                     return res(result);
