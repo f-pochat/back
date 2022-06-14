@@ -11,7 +11,7 @@ import {saveRound} from "./round/saveround.route";
 import {addReview} from "./review/addreview.route";
 import {getReviewsByCourse} from "./review/getReviewsByCourse.route";
 import {getRoundsByPlayer} from "./round/getRoundsByPlayer.route";
-import {getPlayerInfo} from "./getPlayerInfo";
+import {getPlayerInfo} from "./getplayer.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
