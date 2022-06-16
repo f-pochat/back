@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginPlayerService = void 0;
 class LoginPlayerService {
-    constructor(playerRepo, passwordHasher) {
+    constructor(playerRepo, passwordHasher, tokenProvider) {
         this.login = (email, password) => __awaiter(this, void 0, void 0, function* () {
             const player = yield this.playerRepo.getByEmail(email);
             if (!player)
@@ -19,10 +19,14 @@ class LoginPlayerService {
             if (!this.passwordHasher.compare(player.password, password))
                 throw Error("Password incorrect!");
             // @ts-ignore
-            return player;
+            return {
+                token: this.tokenProv.loginPlayer(email, player.id),
+                id: player.id,
+            };
         });
         this.playerRepo = playerRepo;
         this.passwordHasher = passwordHasher;
+        this.tokenProv = tokenProvider;
     }
 }
 exports.LoginPlayerService = LoginPlayerService;

@@ -12,8 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllCoursesDemo = void 0;
 const getCoursesController_provider_1 = require("../../providers/player/getCoursesController.provider");
 const getAllCoursesDemo = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    //const token: string = <string>req.headers['authorization'];
-    //const username: string = verifyAdmin(token.substring(7));
+    /*
+    const token: string = <string>req.headers['authorization'];
+    verifyTokenPlayer(token.substring(7));*/
     return yield getCoursesController_provider_1.GetCoursesControllerProvider.getController().getAllCoursesDemo();
 });
 exports.getAllCoursesDemo = getAllCoursesDemo;

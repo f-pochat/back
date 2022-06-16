@@ -14,7 +14,7 @@ const reviewController_provider_1 = require("../../../providers/player/reviewCon
 const getReviewsByCourse = ({ id }, req) => __awaiter(void 0, void 0, void 0, function* () {
     // @ts-ignore
     //const token: string = <string>req.headers['authorization'];
-    //const username: string = verifyAdmin(token.substring(7));
+    //const username: string = verifyTokenPlayer(token.substring(7));
     return yield reviewController_provider_1.ReviewControllerProvider.getController().getReviewsByCourse(id);
 });
 exports.getReviewsByCourse = getReviewsByCourse;

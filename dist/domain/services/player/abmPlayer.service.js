@@ -28,10 +28,13 @@ class ABMPlayerService {
         });
         this.edit = (id, player) => __awaiter(this, void 0, void 0, function* () {
             const duplicatePlayerEmail = yield this.playerRepo.getByEmail(player.email);
-            if (duplicatePlayerEmail)
-                throw Error("Email already exists!");
             const hashedPassword = this.passwordHasher.hash(player.password);
-            this.playerRepo.editPlayer(id, new player_modeldb_1.PlayerDB(id, player.email, true, player.fullname, hashedPassword, player.handicap.toString(), player.photo));
+            if (duplicatePlayerEmail.password === hashedPassword || duplicatePlayerEmail.password === player.password) {
+                this.playerRepo.editPlayer(id, new player_modeldb_1.PlayerDB(id, player.email, true, player.fullname, duplicatePlayerEmail.password, player.handicap.toString(), player.photo));
+            }
+            else {
+                this.playerRepo.editPlayer(id, new player_modeldb_1.PlayerDB(id, player.email, true, player.fullname, hashedPassword, player.handicap.toString(), player.photo));
+            }
         });
         this.getPlayer = (id) => __awaiter(this, void 0, void 0, function* () {
             return this.playerRepo.getPlayer(id);

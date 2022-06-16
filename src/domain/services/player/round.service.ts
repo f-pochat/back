@@ -9,7 +9,7 @@ export class RoundService {
         this.roundRepo = roundRepo;
     }
 
-    saveRound = async(userId:string,courseId: string, playedHoles: any[]):Promise<any> => {
+    newRound = async(userId:string,courseId: string):Promise<any> => {
 
         /*
         //Check by ID
@@ -17,7 +17,12 @@ export class RoundService {
         if (!player) throw Error("Email doesn't exists!");
         */
 
-        return this.roundRepo.saveRound(userId, courseId,new Date(Date.now()),playedHoles);
+        return this.roundRepo.newRound(userId, courseId,new Date(Date.now()));
+    }
+
+    addHole = async(playerId: string,courseId: string, num: number, score: number, putts: number, fairway: string):Promise<any> => {
+
+        return this.roundRepo.addHole(playerId, courseId, num,score,putts,fairway);
     }
 
     getRoundsByPlayer = async(id: string): Promise<any[]> => {

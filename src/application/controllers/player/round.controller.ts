@@ -8,10 +8,12 @@ export class RoundController{
         this._roundService = roundService;
     }
 
-    async saveRound(userId: string,courseId: string, playedHoles: any[]): Promise<any>{
-        if (playedHoles.length < 1) throw new Error("No holes inputed");
+    async newRound(userId: string,courseId: string): Promise<any>{
+        return await this._roundService.newRound(userId,courseId);
+    }
 
-        return await this._roundService.saveRound(userId,courseId,playedHoles);
+    async addHole(playerId: string, courseId: string, num: number, score: number, putts: number, fairway: string): Promise<any>{
+        return await this._roundService.addHole(playerId,courseId, num,score,putts,fairway);
     }
 
     async getRoundsByPlayer(id: string): Promise<any[]>{

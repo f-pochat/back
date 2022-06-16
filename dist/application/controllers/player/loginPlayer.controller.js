@@ -16,7 +16,6 @@ class LoginPlayerController {
     }
     loginPlayer(email, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("e" + email + "p" + password);
             if (password.length < 8)
                 throw new Error("Password must be more than 7 characters!");
             if (!/^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(email)) {

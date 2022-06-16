@@ -14,7 +14,7 @@ app.use(route_1.router);
 app.use(route_2.playerRouter);
 const startServer = () => {
     const PORT = app.get('port');
-    app.listen(4000);
+    app.listen(8080);
     (0, database_1.connect)();
 };
 startServer();

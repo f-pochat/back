@@ -15,8 +15,10 @@ const loginPlayer = ({ input }, req) => __awaiter(void 0, void 0, void 0, functi
     const { email, password } = input;
     //const token: string = <string>req.headers['authorization'];
     //const username: string = verifyAdmin(token.substring(7));
+    const payload = yield loginPlayerController_provider_1.LoginPlayerControllerProvider.getController().loginPlayer(email, password);
     return {
-        id: (yield loginPlayerController_provider_1.LoginPlayerControllerProvider.getController().loginPlayer(email, password)).id
+        token: payload.token,
+        id: payload.id,
     };
 });
 exports.loginPlayer = loginPlayer;

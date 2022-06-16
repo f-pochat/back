@@ -14,16 +14,24 @@ class RoundController {
     constructor(roundService) {
         this._roundService = roundService;
     }
-    saveRound(courseId, userId, playedHoles) {
+    newRound(userId, courseId) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (playedHoles.length < 1)
-                throw new Error("No holes inputed");
-            return yield this._roundService.saveRound(courseId, userId, playedHoles);
+            return yield this._roundService.newRound(userId, courseId);
+        });
+    }
+    addHole(playerId, courseId, num, score, putts, fairway) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._roundService.addHole(playerId, courseId, num, score, putts, fairway);
         });
     }
     getRoundsByPlayer(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this._roundService.getRoundsByPlayer(id);
+        });
+    }
+    getRoundsByCourse(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._roundService.getRoundsByCourse(id);
         });
     }
 }
