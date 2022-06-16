@@ -28,4 +28,13 @@ export class RoundService {
         })
         return allRoundsByPlayer;
     }
+
+    getRoundsByCourse = async(id: string): Promise<any[]> => {
+        const rounds = await this.roundRepo.getRoundsByCourse(id);
+        const allRoundsByCourse: Round[] = [];
+        rounds.map((r: any) => {
+            allRoundsByCourse.push(new Round(r._id,r.userId, r.courseId, r.playedAt, r.playedHoles))
+        })
+        return allRoundsByCourse;
+    }
 }

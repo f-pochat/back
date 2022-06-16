@@ -9,3 +9,10 @@ export const getRoundsByPlayer = async ({id}: any, req: Request): Promise<any[]>
     //const username: string = verifyTokenPlayer(token.substring(7));
     return await RoundControllerProvider.getController().getRoundsByPlayer(id);
 }
+
+export const getRoundsByCourse = async ({id}: any, req: Request): Promise<any[]> => {
+    // @ts-ignore
+    //const token: string = <string>req.headers['authorization'];
+    //const username: string = verifyTokenPlayer(token.substring(7));
+    return await RoundControllerProvider.getController().getRoundsByCourse(id);
+}

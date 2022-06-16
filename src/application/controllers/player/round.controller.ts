@@ -17,4 +17,8 @@ export class RoundController{
     async getRoundsByPlayer(id: string): Promise<any[]>{
         return await this._roundService.getRoundsByPlayer(id);
     }
+
+    async getRoundsByCourse(id: string): Promise<any[]>{
+        return await this._roundService.getRoundsByCourse(id);
+    }
 }

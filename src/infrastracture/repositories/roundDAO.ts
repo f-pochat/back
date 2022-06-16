@@ -26,4 +26,20 @@ export class RoundDAO implements IRoundRepo{
             });
         })
     }
+
+    async getRoundsByCourse(id: string) : Promise<any[]> {
+        const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`
+        return new Promise((res, rej) => {
+            MongoClient.connect(url, async(err, db) => {
+                if (err) throw err;
+
+                await db?.db().collection('rounds').find({courseId: id}).toArray((err, result) => {
+                    if (err) throw err;
+                    // @ts-ignore
+                    return res(result);
+                });
+                db?.close();
+            });
+        })
+    }
 }

@@ -10,7 +10,7 @@ import {getCourse} from "../course/getCourse.route";
 import {saveRound} from "./round/saveround.route";
 import {addReview} from "./review/addreview.route";
 import {getReviewsByCourse} from "./review/getReviewsByCourse.route";
-import {getRoundsByPlayer} from "./round/getRoundsByPlayer.route";
+import {getRoundsByCourse, getRoundsByPlayer} from "./round/getRounds.route";
 import {getPlayerInfo} from "./getplayer.route";
 const playerRouter = express.Router();
 
@@ -21,6 +21,7 @@ const schema = buildSchema(`
         getPlayerInfo(id: String!) : Player!
         getReviewsByCourse(id: String!) : [Review]
         getRoundsByPlayer(id: String!) : [Round]
+        getRoundsByCourse(id: String!) : [Round]
     }
     
     type Mutation{
@@ -156,6 +157,7 @@ const root = {
     addReview,
     getReviewsByCourse,
     getRoundsByPlayer,
+    getRoundsByCourse,
     getPlayerInfo,
 }
 
