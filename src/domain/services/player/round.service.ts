@@ -1,5 +1,6 @@
 import {IRoundRepo} from "../../repositories/round.repository";
 import {Round} from "../../models/Round.model";
+import {strict} from "assert";
 
 
 export class RoundService {
@@ -23,6 +24,14 @@ export class RoundService {
     addHole = async(playerId: string,courseId: string, num: number, score: number, putts: number, fairway: string):Promise<any> => {
 
         return this.roundRepo.addHole(playerId, courseId, num,score,putts,fairway);
+    }
+
+    saveRound = async(playerId: string): Promise<any> => {
+        return this.roundRepo.saveRound(playerId);
+    }
+
+    deleteRound = async(playerId: string): Promise<any> => {
+        return this.roundRepo.deleteRound(playerId);
     }
 
     getRoundsByPlayer = async(id: string): Promise<any[]> => {

@@ -43,6 +43,18 @@ export class RoundDAO implements IRoundRepo{
         await db?.close();
     }
 
+    async saveRound(playerId: string): Promise<any>{
+        const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`
+        const db = await MongoClient.connect(url);
+        await db?.db().collection('rounds').updateOne({userId: playerId, onGoing: true}, {$set: {onGoing: false}});
+    }
+
+    async deleteRound(playerId: string): Promise<any>{
+        const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`
+        const db = await MongoClient.connect(url);
+        await db?.db().collection('rounds').deleteOne({userId: playerId, onGoing: true});
+    }
+
     //Get rounds by the id of the player
     async getRoundsByPlayer(id: string) : Promise<any[]> {
         const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`

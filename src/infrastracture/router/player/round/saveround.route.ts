@@ -18,3 +18,18 @@ export const addHole = async ({input}: any, req: Request): Promise<any> => {
     const username: string = verifyTokenPlayer(token.substring(7));
     return await RoundControllerProvider.getController().addHole(playerId, courseId, num,score,putts,fairway);
 }
+
+
+export const saveRound = async ({playerId}: any, req: Request): Promise<any> => {
+    // @ts-ignore
+    const token: string = <string>req.headers['authorization'];
+    const username: string = verifyTokenPlayer(token.substring(7));
+    return await RoundControllerProvider.getController().saveRound(playerId);
+}
+
+export const deleteRound = async ({playerId}: any,req: Request): Promise<any> => {
+    // @ts-ignore
+    const token: string = <string>req.headers['authorization'];
+    const username: string = verifyTokenPlayer(token.substring(7));
+    return await RoundControllerProvider.getController().deleteRound(playerId);
+}

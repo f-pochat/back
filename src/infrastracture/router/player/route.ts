@@ -7,7 +7,7 @@ import {editPlayer} from "./editplayer.route";
 import {loginPlayer} from "./loginplayer.route";
 import {getAllCoursesDemo} from "./getcourses.route";
 import {getCourse} from "../course/getCourse.route";
-import {addHole, newRound} from "./round/saveround.route";
+import {addHole, deleteRound, newRound, saveRound} from "./round/saveround.route";
 import {addReview} from "./review/addreview.route";
 import {getReviewsByCourse} from "./review/getReviewsByCourse.route";
 import {getRoundsByCourse, getRoundsByPlayer} from "./round/getRounds.route";
@@ -32,6 +32,9 @@ const schema = buildSchema(`
         newRound(input: RoundInput) : Round
         addReview(input: ReviewInput) : Review
         addHole(input: PlayedHoleInput) : PlayedHole
+        saveRound(playerId: String!) : Round
+        deleteRound(playerId: String!) : Round
+        
     }
     
     type Token{
@@ -161,6 +164,8 @@ const root = {
     getRoundsByCourse,
     getPlayerInfo,
     addHole,
+    saveRound,
+    deleteRound,
 }
 
 playerRouter.use('/player',  graphqlHTTP({

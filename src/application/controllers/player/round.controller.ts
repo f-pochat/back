@@ -23,4 +23,12 @@ export class RoundController{
     async getRoundsByCourse(id: string): Promise<any[]>{
         return await this._roundService.getRoundsByCourse(id);
     }
+
+    async saveRound(playerId: string): Promise<any>{
+        return this._roundService.saveRound(playerId);
+    }
+
+    async deleteRound(playerId: string): Promise<any>{
+        return this._roundService.deleteRound(playerId);
+    }
 }
