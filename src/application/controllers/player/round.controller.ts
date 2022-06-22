@@ -31,4 +31,8 @@ export class RoundController{
     async deleteRound(playerId: string): Promise<any>{
         return this._roundService.deleteRound(playerId);
     }
+
+    async getOngoingRound(id: string) : Promise<any>{
+        return await this._roundService.getOngoingRound(id);
+    }
 }

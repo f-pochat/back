@@ -10,7 +10,7 @@ import {getCourse} from "../course/getCourse.route";
 import {addHole, deleteRound, newRound, saveRound} from "./round/saveround.route";
 import {addReview} from "./review/addreview.route";
 import {getReviewsByCourse} from "./review/getReviewsByCourse.route";
-import {getRoundsByCourse, getRoundsByPlayer} from "./round/getRounds.route";
+import {getOngoingRound, getRoundsByCourse, getRoundsByPlayer} from "./round/getRounds.route";
 import {getPlayerInfo} from "./getplayer.route";
 const playerRouter = express.Router();
 
@@ -22,6 +22,7 @@ const schema = buildSchema(`
         getReviewsByCourse(id: String!) : [Review]
         getRoundsByPlayer(id: String!) : [Round]
         getRoundsByCourse(id: String!) : [Round]
+        getOngoingRound(id: String!) : Round
     }
     
     type Mutation{
@@ -167,6 +168,7 @@ const root = {
     addHole,
     saveRound,
     deleteRound,
+    getOngoingRound,
 }
 
 playerRouter.use('/player',  graphqlHTTP({
