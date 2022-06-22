@@ -88,6 +88,7 @@ const schema = buildSchema(`
         playerId: String!
         courseId: String!
         playDate: String!
+        playedHoles: [PlayedHole]!
     }
     
     type PlayedHole {
