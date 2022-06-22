@@ -7,10 +7,10 @@ import {editPlayer} from "./editplayer.route";
 import {loginPlayer} from "./loginplayer.route";
 import {getAllCoursesDemo} from "./getcourses.route";
 import {getCourse} from "../course/getCourse.route";
-import {saveRound} from "./round/saveround.route";
+import {addHole, deleteRound, newRound, saveRound} from "./round/saveround.route";
 import {addReview} from "./review/addreview.route";
 import {getReviewsByCourse} from "./review/getReviewsByCourse.route";
-import {getRoundsByPlayer} from "./round/getRoundsByPlayer.route";
+import {getRoundsByCourse, getRoundsByPlayer} from "./round/getRounds.route";
 import {getPlayerInfo} from "./getplayer.route";
 const playerRouter = express.Router();
 
@@ -21,6 +21,7 @@ const schema = buildSchema(`
         getPlayerInfo(id: String!) : Player!
         getReviewsByCourse(id: String!) : [Review]
         getRoundsByPlayer(id: String!) : [Round]
+        getRoundsByCourse(id: String!) : [Round]
     }
     
     type Mutation{
@@ -28,8 +29,12 @@ const schema = buildSchema(`
         deletePlayer(id: String!) : ID
         editPlayer(input: EditPlayerInput) : Player
         loginPlayer(input: LoginPlayerInput) : Token
-        saveRound(input: RoundInput) : Round
+        newRound(input: RoundInput) : Round
         addReview(input: ReviewInput) : Review
+        addHole(input: PlayedHoleInput) : PlayedHole
+        saveRound(playerId: String!) : Round
+        deleteRound(playerId: String!) : Round
+        
     }
     
     type Token{
@@ -83,7 +88,6 @@ const schema = buildSchema(`
         playerId: String!
         courseId: String!
         playDate: String!
-        playedHoles: [PlayedHole]
     }
     
     type PlayedHole {
@@ -124,10 +128,11 @@ const schema = buildSchema(`
     input RoundInput{
         playerId: String!
         courseId: String!
-        playedHoles: [PlayedHoleInput]
     }
     
     input PlayedHoleInput {
+        playerId: String!
+        courseId: String!
         num: Int!
         score: Int!
         putts: Int!
@@ -152,11 +157,15 @@ const root = {
     loginPlayer,
     getAllCoursesDemo,
     getCourse,
-    saveRound,
+    newRound,
     addReview,
     getReviewsByCourse,
     getRoundsByPlayer,
+    getRoundsByCourse,
     getPlayerInfo,
+    addHole,
+    saveRound,
+    deleteRound,
 }
 
 playerRouter.use('/player',  graphqlHTTP({

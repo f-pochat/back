@@ -12,14 +12,49 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoundDAO = void 0;
 const Round = require('../../domain/modelsDB/round/round.modeldb');
 const mongodb_1 = require("mongodb");
+const Round_model_1 = require("../../domain/models/Round.model");
+const typeorm_1 = require("typeorm");
+const course_modeldb_1 = require("../../domain/modelsDB/course/course.modeldb");
 const ck = require('ckey');
 class RoundDAO {
-    saveRound(courseId, userId, playedAt, playedHoles) {
+    constructor() {
+        this.repo = (0, typeorm_1.getRepository)(course_modeldb_1.CourseDB, "db");
+    }
+    newRound(userId, courseId, playedAt) {
         return __awaiter(this, void 0, void 0, function* () {
-            const round = new Round({ courseId: courseId, userId: userId, playedAt: playedAt, playedHoles: playedHoles });
+            const round = new Round({ userId: userId, courseId: courseId, playedAt: playedAt, playedHoles: [] });
             yield round.save();
         });
     }
+    addHole(playerId, courseId, num, score, putts, fairway) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`;
+            const numOfHoles = yield this.repo.count({ where: { id: courseId } });
+            const db = yield mongodb_1.MongoClient.connect(url);
+            let round = yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').findOne({ userId: playerId, onGoing: true }));
+            if (round === null)
+                throw new Error('Round not found!');
+            let holes = round.playedHoles;
+            let index = -1;
+            holes.forEach((h, i) => {
+                if (h.num === num)
+                    index = i;
+            });
+            console.log(index);
+            if (index === -1) {
+                yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').updateOne({ userId: playerId, onGoing: true }, { $push: { playedHoles: new Round_model_1.PlayedHole(num, score, putts, fairway) } }));
+            }
+            else {
+                yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').updateOne({ userId: playerId, onGoing: true, "playedHoles.num": num }, { $set: { 'playedHoles.$.score': score } }));
+                yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').updateOne({ userId: playerId, onGoing: true, "playedHoles.num": num }, { $set: { 'playedHoles.$.putts': putts } }));
+                yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').updateOne({ userId: playerId, onGoing: true, "playedHoles.num": num }, { $set: { 'playedHoles.$.fairway': fairway } }));
+            }
+            //await db?.db().collection('rounds').findOne({userId: playerId, onGoing: true})
+            //await db?.db().collection('rounds').updateOne({userId: playerId, onGoing: true}, {$push: {playedHoles: new PlayedHole(num, score, putts, fairway)}});
+            yield (db === null || db === void 0 ? void 0 : db.close());
+        });
+    }
+    //Get rounds by the id of the player
     getRoundsByPlayer(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`;
@@ -28,6 +63,24 @@ class RoundDAO {
                     if (err)
                         throw err;
                     yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').find({ userId: id }).toArray((err, result) => {
+                        if (err)
+                            throw err;
+                        // @ts-ignore
+                        return res(result);
+                    }));
+                    db === null || db === void 0 ? void 0 : db.close();
+                }));
+            });
+        });
+    }
+    getRoundsByCourse(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`;
+            return new Promise((res, rej) => {
+                mongodb_1.MongoClient.connect(url, (err, db) => __awaiter(this, void 0, void 0, function* () {
+                    if (err)
+                        throw err;
+                    yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').find({ courseId: id }).toArray((err, result) => {
                         if (err)
                             throw err;
                         // @ts-ignore

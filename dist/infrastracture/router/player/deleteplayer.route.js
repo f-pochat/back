@@ -11,10 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deletePlayer = void 0;
 const abmPlayerController_provider_1 = require("../../providers/player/abmPlayerController.provider");
+const verifyTokenPlayer_1 = require("./verifyTokenPlayer");
 const deletePlayer = ({ id }, req) => __awaiter(void 0, void 0, void 0, function* () {
     // @ts-ignore
     const token = req.headers['authorization'];
-    //const username: string = verifyAdmin(token.substring(7));
+    const username = (0, verifyTokenPlayer_1.verifyTokenPlayer)(token.substring(7));
     return yield abmPlayerController_provider_1.ABMPlayerControllerProvider.getController().deletePlayer(id);
 });
 exports.deletePlayer = deletePlayer;

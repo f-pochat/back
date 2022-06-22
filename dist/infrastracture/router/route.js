@@ -140,5 +140,4 @@ const root = {
 router.use('/admin', (0, express_graphql_1.graphqlHTTP)({
     schema: schema,
     rootValue: root,
-    graphiql: true,
 }));

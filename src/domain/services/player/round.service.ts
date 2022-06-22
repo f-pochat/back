@@ -1,5 +1,6 @@
 import {IRoundRepo} from "../../repositories/round.repository";
 import {Round} from "../../models/Round.model";
+import {strict} from "assert";
 
 
 export class RoundService {
@@ -9,7 +10,7 @@ export class RoundService {
         this.roundRepo = roundRepo;
     }
 
-    saveRound = async(userId:string,courseId: string, playedHoles: any[]):Promise<any> => {
+    newRound = async(userId:string,courseId: string):Promise<any> => {
 
         /*
         //Check by ID
@@ -17,7 +18,20 @@ export class RoundService {
         if (!player) throw Error("Email doesn't exists!");
         */
 
-        return this.roundRepo.saveRound(userId, courseId,new Date(Date.now()),playedHoles);
+        return this.roundRepo.newRound(userId, courseId,new Date(Date.now()));
+    }
+
+    addHole = async(playerId: string,courseId: string, num: number, score: number, putts: number, fairway: string):Promise<any> => {
+
+        return this.roundRepo.addHole(playerId, courseId, num,score,putts,fairway);
+    }
+
+    saveRound = async(playerId: string): Promise<any> => {
+        return this.roundRepo.saveRound(playerId);
+    }
+
+    deleteRound = async(playerId: string): Promise<any> => {
+        return this.roundRepo.deleteRound(playerId);
     }
 
     getRoundsByPlayer = async(id: string): Promise<any[]> => {
@@ -27,5 +41,14 @@ export class RoundService {
             allRoundsByPlayer.push(new Round(r._id,r.userId, r.courseId, r.playedAt, r.playedHoles))
         })
         return allRoundsByPlayer;
+    }
+
+    getRoundsByCourse = async(id: string): Promise<any[]> => {
+        const rounds = await this.roundRepo.getRoundsByCourse(id);
+        const allRoundsByCourse: Round[] = [];
+        rounds.map((r: any) => {
+            allRoundsByCourse.push(new Round(r._id,r.userId, r.courseId, r.playedAt, r.playedHoles))
+        })
+        return allRoundsByCourse;
     }
 }

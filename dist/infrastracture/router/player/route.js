@@ -16,7 +16,8 @@ const getCourse_route_1 = require("../course/getCourse.route");
 const saveround_route_1 = require("./round/saveround.route");
 const addreview_route_1 = require("./review/addreview.route");
 const getReviewsByCourse_route_1 = require("./review/getReviewsByCourse.route");
-const getRoundsByPlayer_route_1 = require("./round/getRoundsByPlayer.route");
+const getRounds_route_1 = require("./round/getRounds.route");
+const getplayer_route_1 = require("./getplayer.route");
 const playerRouter = express_1.default.Router();
 exports.playerRouter = playerRouter;
 const schema = (0, graphql_1.buildSchema)(`
@@ -26,18 +27,21 @@ const schema = (0, graphql_1.buildSchema)(`
         getPlayerInfo(id: String!) : Player!
         getReviewsByCourse(id: String!) : [Review]
         getRoundsByPlayer(id: String!) : [Round]
+        getRoundsByCourse(id: String!) : [Round]
     }
     
     type Mutation{
         addPlayer(input: AddPlayerInput) : Player
         deletePlayer(id: String!) : ID
         editPlayer(input: EditPlayerInput) : Player
-        loginPlayer(input: LoginPlayerInput) : UserID
-        saveRound(input: RoundInput) : Round
+        loginPlayer(input: LoginPlayerInput) : Token
+        newRound(input: RoundInput) : Round
         addReview(input: ReviewInput) : Review
+        addHole(input: PlayedHoleInput) : PlayedHole
     }
     
-    type UserID{
+    type Token{
+        token: String
         id: String
     }
 
@@ -87,7 +91,6 @@ const schema = (0, graphql_1.buildSchema)(`
         playerId: String!
         courseId: String!
         playDate: String!
-        playedHoles: [PlayedHole]
     }
     
     type PlayedHole {
@@ -128,10 +131,11 @@ const schema = (0, graphql_1.buildSchema)(`
     input RoundInput{
         playerId: String!
         courseId: String!
-        playedHoles: [PlayedHoleInput]
     }
     
     input PlayedHoleInput {
+        playerId: String!
+        courseId: String!
         num: Int!
         score: Int!
         putts: Int!
@@ -155,13 +159,15 @@ const root = {
     loginPlayer: loginplayer_route_1.loginPlayer,
     getAllCoursesDemo: getcourses_route_1.getAllCoursesDemo,
     getCourse: getCourse_route_1.getCourse,
-    saveRound: saveround_route_1.saveRound,
+    newRound: saveround_route_1.newRound,
     addReview: addreview_route_1.addReview,
     getReviewsByCourse: getReviewsByCourse_route_1.getReviewsByCourse,
-    getRoundsByPlayer: getRoundsByPlayer_route_1.getRoundsByPlayer,
+    getRoundsByPlayer: getRounds_route_1.getRoundsByPlayer,
+    getRoundsByCourse: getRounds_route_1.getRoundsByCourse,
+    getPlayerInfo: getplayer_route_1.getPlayerInfo,
+    addHole: saveround_route_1.addHole,
 };
 playerRouter.use('/player', (0, express_graphql_1.graphqlHTTP)({
     schema: schema,
     rootValue: root,
-    graphiql: true,
 }));

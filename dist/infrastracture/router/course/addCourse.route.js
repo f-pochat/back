@@ -11,10 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addCourse = void 0;
 const addCourseController_provider_1 = require("../../providers/course/addCourseController.provider");
+const verifyToken_1 = require("../verifyToken");
 const addCourse = ({ input }, req) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, creator, description, location, holes } = input;
-    /*const token: string = <string>req.headers['authorization'];
-    const username: string = verifyAdmin(token.substring(7));*/
+    // @ts-ignore
+    const token = req.headers['authorization'];
+    const username = (0, verifyToken_1.verifyAdmin)(token.substring(7));
     return yield addCourseController_provider_1.AddCourseControllerProvider.getController().addCourse(name, creator, description, location, holes);
 });
 exports.addCourse = addCourse;

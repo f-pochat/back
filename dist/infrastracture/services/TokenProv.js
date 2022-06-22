@@ -9,5 +9,8 @@ class TokenProv {
     login(user, role) {
         return jsonwebtoken_1.default.sign({ _user: user, _role: role }, 'golftrack');
     }
+    loginPlayer(user, id) {
+        return jsonwebtoken_1.default.sign({ _user: user, _id: id }, 'golftrack');
+    }
 }
 exports.TokenProv = TokenProv;

@@ -11,11 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.editPlayer = void 0;
 const abmPlayerController_provider_1 = require("../../providers/player/abmPlayerController.provider");
+const verifyTokenPlayer_1 = require("./verifyTokenPlayer");
 const editPlayer = ({ input }, req) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, email, fullname, password, handicap, photo } = input;
+    console.log(req);
     // @ts-ignore
     const token = req.headers['authorization'];
-    //const username: string = verifyAdmin(token.substring(7));
+    console.log(token);
+    const username = (0, verifyTokenPlayer_1.verifyTokenPlayer)(token.substring(7));
     return yield abmPlayerController_provider_1.ABMPlayerControllerProvider.getController().editPlayer(id, email, fullname, password, handicap, photo);
 });
 exports.editPlayer = editPlayer;

@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const RoundSchema = new mongoose.Schema({
+    onGoing: {
+        type: Boolean,
+        required: true,
+        default: true,
+    },
     userId: {
         type: String,
         required: true,

@@ -26,7 +26,7 @@ const runDbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
         host: "golftrack.postgres.database.azure.com",
         port: 5432,
         username: "fedepoch",
-        password: ck.POSTGRES_PASSWORD,
+        password: process.env.POSTGRES_PASSWORD,
         database: "postgres",
         ssl: true,
         synchronize: true,
@@ -38,7 +38,7 @@ const runDbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
             review_modeldb_1.ReviewDB
         ],
     });
-    mongoose.connect(`mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`, {
+    mongoose.connect(`mongodb+srv://golftrackmdb:${process.env.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });

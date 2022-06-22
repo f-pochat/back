@@ -9,9 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCourse = void 0;
+exports.getPlayerInfo = void 0;
 const abmPlayerController_provider_1 = require("../../providers/player/abmPlayerController.provider");
-const getCourse = ({ id }, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getPlayerInfo = ({ id }, req) => __awaiter(void 0, void 0, void 0, function* () {
+    // @ts-ignore
+    //const token: string = <string>req.headers['authorization'];
+    //const username: string = verifyTokenPlayer(token.substring(7));
     return yield abmPlayerController_provider_1.ABMPlayerControllerProvider.getController().getPlayer(id);
 });
-exports.getCourse = getCourse;
+exports.getPlayerInfo = getPlayerInfo;
