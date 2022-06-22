@@ -51,4 +51,9 @@ export class RoundService {
         })
         return allRoundsByCourse;
     }
+
+    getOngoingRound = async (id: string): Promise<any> => {
+        const round = await this.roundRepo.getOngoingRound(id);
+        return new Round(round._id, round.userId, round.courseId, round.playedAt, round.playedHoles);
+    }
 }

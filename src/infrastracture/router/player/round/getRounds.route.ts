@@ -16,3 +16,7 @@ export const getRoundsByCourse = async ({id}: any, req: Request): Promise<any[]>
     //const username: string = verifyTokenPlayer(token.substring(7));
     return await RoundControllerProvider.getController().getRoundsByCourse(id);
 }
+
+export const getOngoingRound = async({id}: any): Promise<any> => {
+    return await RoundControllerProvider.getController().getOngoingRound(id);
+}

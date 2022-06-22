@@ -87,4 +87,11 @@ export class RoundDAO implements IRoundRepo{
             });
         })
     }
+
+    async getOngoingRound(id: string): Promise<any> {
+        const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`
+        const db = await MongoClient.connect(url);
+        const round = await db?.db().collection('rounds').findOne({userId: id, onGoing: true});
+        return round;
+    }
 }
