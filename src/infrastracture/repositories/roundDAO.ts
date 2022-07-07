@@ -94,4 +94,13 @@ export class RoundDAO implements IRoundRepo{
         const round = await db?.db().collection('rounds').findOne({userId: id, onGoing: true});
         return round;
     }
+
+    async getRoundById(id:string): Promise<any> {
+        console.log(id);
+        const ObjectId = require('mongodb').ObjectId;
+        const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`
+        const db = await MongoClient.connect(url);
+        const round = await db?.db().collection('rounds').findOne({_id: new ObjectId(id)});
+        return round;
+    }
 }

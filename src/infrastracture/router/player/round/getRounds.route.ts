@@ -20,3 +20,7 @@ export const getRoundsByCourse = async ({id}: any, req: Request): Promise<any[]>
 export const getOngoingRound = async({id}: any): Promise<any> => {
     return await RoundControllerProvider.getController().getOngoingRound(id);
 }
+
+export const getRoundById = async({id}: any) : Promise<any> => {
+    return await RoundControllerProvider.getController().getRoundById(id);
+}
