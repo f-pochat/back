@@ -6,4 +6,5 @@ export interface IRoundRepo {
     saveRound(playerId: string): Promise<any>;
     deleteRound(playerId: string): Promise<any>;
     getOngoingRound(id: string): Promise<any>;
+    getRoundById(id: string): Promise<any>;
 }

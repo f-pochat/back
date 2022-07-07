@@ -35,4 +35,8 @@ export class RoundController{
     async getOngoingRound(id: string) : Promise<any>{
         return await this._roundService.getOngoingRound(id);
     }
+
+    async getRoundById(id: string) : Promise<any>{
+        return await this._roundService.getRoundById(id);
+    }
 }
