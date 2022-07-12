@@ -39,9 +39,14 @@ export class LoginPlayerService {
     idpLogin = async(service: string, email: string, fullName: string) : Promise<any> => {
         const player: Player = await this.playerRepo.getByEmail(email);
         if (!player){
-            const newPlayer: PlayerDB = new PlayerDB(this.idRepo.generateId(),email,true, fullName, service, "0", "");
+            const id = this.idRepo.generateId();
+            const newPlayer: PlayerDB = new PlayerDB(id,email,true, fullName, service, "0", "");
             this.playerRepo.addPlayer(newPlayer);
-        }else if (player.password === 'google' || player.password === 'facebook'){
+            return {
+                token: this.tokenProv.loginPlayer(email,id),
+                id: id,
+            }
+        }else if (player.password !== 'google' && player.password !== 'facebook'){
             throw Error('Cant sign in with an already used email');
         }else{
             return {

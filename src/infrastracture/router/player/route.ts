@@ -150,7 +150,7 @@ const schema = buildSchema(`
         userId: String!
     }
     
-    input IdpLoginInput{
+    input IDPLoginInput{
         service: String!
         email: String!
         fullName: String!
