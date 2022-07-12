@@ -28,6 +28,8 @@ const schema = (0, graphql_1.buildSchema)(`
         getReviewsByCourse(id: String!) : [Review]
         getRoundsByPlayer(id: String!) : [Round]
         getRoundsByCourse(id: String!) : [Round]
+        getOngoingRound(id: String!) : Round
+        getRoundById(id: String!) : Round
     }
     
     type Mutation{
@@ -38,6 +40,9 @@ const schema = (0, graphql_1.buildSchema)(`
         newRound(input: RoundInput) : Round
         addReview(input: ReviewInput) : Review
         addHole(input: PlayedHoleInput) : PlayedHole
+        saveRound(playerId: String!) : Round
+        deleteRound(playerId: String!) : Round
+        
     }
     
     type Token{
@@ -91,6 +96,7 @@ const schema = (0, graphql_1.buildSchema)(`
         playerId: String!
         courseId: String!
         playDate: String!
+        playedHoles: [PlayedHole]!
     }
     
     type PlayedHole {
@@ -166,6 +172,10 @@ const root = {
     getRoundsByCourse: getRounds_route_1.getRoundsByCourse,
     getPlayerInfo: getplayer_route_1.getPlayerInfo,
     addHole: saveround_route_1.addHole,
+    saveRound: saveround_route_1.saveRound,
+    deleteRound: saveround_route_1.deleteRound,
+    getOngoingRound: getRounds_route_1.getOngoingRound,
+    getRoundById: getRounds_route_1.getRoundById,
 };
 playerRouter.use('/player', (0, express_graphql_1.graphqlHTTP)({
     schema: schema,

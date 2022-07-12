@@ -40,7 +40,6 @@ class RoundDAO {
                 if (h.num === num)
                     index = i;
             });
-            console.log(index);
             if (index === -1) {
                 yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').updateOne({ userId: playerId, onGoing: true }, { $push: { playedHoles: new Round_model_1.PlayedHole(num, score, putts, fairway) } }));
             }
@@ -54,6 +53,20 @@ class RoundDAO {
             yield (db === null || db === void 0 ? void 0 : db.close());
         });
     }
+    saveRound(playerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`;
+            const db = yield mongodb_1.MongoClient.connect(url);
+            yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').updateOne({ userId: playerId, onGoing: true }, { $set: { onGoing: false } }));
+        });
+    }
+    deleteRound(playerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`;
+            const db = yield mongodb_1.MongoClient.connect(url);
+            yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').deleteOne({ userId: playerId, onGoing: true }));
+        });
+    }
     //Get rounds by the id of the player
     getRoundsByPlayer(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -62,7 +75,7 @@ class RoundDAO {
                 mongodb_1.MongoClient.connect(url, (err, db) => __awaiter(this, void 0, void 0, function* () {
                     if (err)
                         throw err;
-                    yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').find({ userId: id }).toArray((err, result) => {
+                    yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').find({ userId: id, onGoing: false }).toArray((err, result) => {
                         if (err)
                             throw err;
                         // @ts-ignore
@@ -80,7 +93,7 @@ class RoundDAO {
                 mongodb_1.MongoClient.connect(url, (err, db) => __awaiter(this, void 0, void 0, function* () {
                     if (err)
                         throw err;
-                    yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').find({ courseId: id }).toArray((err, result) => {
+                    yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').find({ courseId: id, onGoing: false }).toArray((err, result) => {
                         if (err)
                             throw err;
                         // @ts-ignore
@@ -89,6 +102,24 @@ class RoundDAO {
                     db === null || db === void 0 ? void 0 : db.close();
                 }));
             });
+        });
+    }
+    getOngoingRound(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`;
+            const db = yield mongodb_1.MongoClient.connect(url);
+            const round = yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').findOne({ userId: id, onGoing: true }));
+            return round;
+        });
+    }
+    getRoundById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(id);
+            const ObjectId = require('mongodb').ObjectId;
+            const url = `mongodb+srv://golftrackmdb:${ck.MONGODB_PASSWORD}@cluster0.v6ntn.mongodb.net/?retryWrites=true&w=majority`;
+            const db = yield mongodb_1.MongoClient.connect(url);
+            const round = yield (db === null || db === void 0 ? void 0 : db.db().collection('rounds').findOne({ _id: new ObjectId(id) }));
+            return round;
         });
     }
 }

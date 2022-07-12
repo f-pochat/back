@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addHole = exports.newRound = void 0;
+exports.deleteRound = exports.saveRound = exports.addHole = exports.newRound = void 0;
 const roundController_provider_1 = require("../../../providers/player/roundController.provider");
 const verifyTokenPlayer_1 = require("../verifyTokenPlayer");
 const newRound = ({ input }, req) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,3 +28,17 @@ const addHole = ({ input }, req) => __awaiter(void 0, void 0, void 0, function* 
     return yield roundController_provider_1.RoundControllerProvider.getController().addHole(playerId, courseId, num, score, putts, fairway);
 });
 exports.addHole = addHole;
+const saveRound = ({ playerId }, req) => __awaiter(void 0, void 0, void 0, function* () {
+    // @ts-ignore
+    const token = req.headers['authorization'];
+    const username = (0, verifyTokenPlayer_1.verifyTokenPlayer)(token.substring(7));
+    return yield roundController_provider_1.RoundControllerProvider.getController().saveRound(playerId);
+});
+exports.saveRound = saveRound;
+const deleteRound = ({ playerId }, req) => __awaiter(void 0, void 0, void 0, function* () {
+    // @ts-ignore
+    const token = req.headers['authorization'];
+    const username = (0, verifyTokenPlayer_1.verifyTokenPlayer)(token.substring(7));
+    return yield roundController_provider_1.RoundControllerProvider.getController().deleteRound(playerId);
+});
+exports.deleteRound = deleteRound;

@@ -34,5 +34,25 @@ class RoundController {
             return yield this._roundService.getRoundsByCourse(id);
         });
     }
+    saveRound(playerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this._roundService.saveRound(playerId);
+        });
+    }
+    deleteRound(playerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this._roundService.deleteRound(playerId);
+        });
+    }
+    getOngoingRound(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._roundService.getOngoingRound(id);
+        });
+    }
+    getRoundById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this._roundService.getRoundById(id);
+        });
+    }
 }
 exports.RoundController = RoundController;

@@ -15,11 +15,12 @@ export class LoginPlayerControllerProvider {
     private static _loginPlayerController: LoginPlayerController;
 
     static createController(): LoginPlayerController{
+        const idRepo: IIdRepo = new IdGenerator();
         const playerRepository: IPlayerRepo = new PlayerDAO();
         const passwordHasher: IPasswordHasherRepo = new PasswordHasherImpl();
         const tokenProv: ITokenProv = new TokenProv();
 
-        const loginPlayerService: LoginPlayerService = new LoginPlayerService(playerRepository, passwordHasher, tokenProv);
+        const loginPlayerService: LoginPlayerService = new LoginPlayerService(idRepo, playerRepository, passwordHasher, tokenProv);
         return new LoginPlayerController(loginPlayerService);
     }
 

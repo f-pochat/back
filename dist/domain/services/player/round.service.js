@@ -24,6 +24,12 @@ class RoundService {
         this.addHole = (playerId, courseId, num, score, putts, fairway) => __awaiter(this, void 0, void 0, function* () {
             return this.roundRepo.addHole(playerId, courseId, num, score, putts, fairway);
         });
+        this.saveRound = (playerId) => __awaiter(this, void 0, void 0, function* () {
+            return this.roundRepo.saveRound(playerId);
+        });
+        this.deleteRound = (playerId) => __awaiter(this, void 0, void 0, function* () {
+            return this.roundRepo.deleteRound(playerId);
+        });
         this.getRoundsByPlayer = (id) => __awaiter(this, void 0, void 0, function* () {
             const rounds = yield this.roundRepo.getRoundsByPlayer(id);
             const allRoundsByPlayer = [];
@@ -39,6 +45,14 @@ class RoundService {
                 allRoundsByCourse.push(new Round_model_1.Round(r._id, r.userId, r.courseId, r.playedAt, r.playedHoles));
             });
             return allRoundsByCourse;
+        });
+        this.getOngoingRound = (id) => __awaiter(this, void 0, void 0, function* () {
+            const round = yield this.roundRepo.getOngoingRound(id);
+            return new Round_model_1.Round(round._id, round.userId, round.courseId, round.playedAt, round.playedHoles);
+        });
+        this.getRoundById = (id) => __awaiter(this, void 0, void 0, function* () {
+            const round = yield this.roundRepo.getRoundById(id);
+            return new Round_model_1.Round(round._id, round.userId, round.courseId, round.playedAt, round.playedHoles);
         });
         this.roundRepo = roundRepo;
     }

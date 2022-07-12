@@ -12,10 +12,14 @@ export class LoginPlayerController{
     async loginPlayer(email: string, password: string): Promise<any>{
         if (password.length < 8) throw new Error("Password must be more than 7 characters!");
 
-        if (!/^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(email)){
+        if (!/^[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/.test(email)){
             throw Error('Invalid email');
         }
 
         return await this._loginPlayerService.login(email,password);
+    }
+
+    async idpLogin(service: string, email: string, fullName: string): Promise<any>{
+        return await this._loginPlayerService.idpLogin(service, email, fullName);
     }
 }

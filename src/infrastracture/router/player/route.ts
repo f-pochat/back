@@ -12,6 +12,7 @@ import {addReview} from "./review/addreview.route";
 import {getReviewsByCourse} from "./review/getReviewsByCourse.route";
 import {getOngoingRound, getRoundById, getRoundsByCourse, getRoundsByPlayer} from "./round/getRounds.route";
 import {getPlayerInfo} from "./getplayer.route";
+import {idpLogin} from "./idplogin.route";
 const playerRouter = express.Router();
 
 const schema = buildSchema(`
@@ -36,7 +37,7 @@ const schema = buildSchema(`
         addHole(input: PlayedHoleInput) : PlayedHole
         saveRound(playerId: String!) : Round
         deleteRound(playerId: String!) : Round
-        
+        idpLogin(input: IDPLoginInput!) : Token
     }
     
     type Token{
@@ -149,6 +150,11 @@ const schema = buildSchema(`
         userId: String!
     }
     
+    input IdpLoginInput{
+        service: String!
+        email: String!
+        fullName: String!
+    }
     
 `)
 
@@ -171,6 +177,7 @@ const root = {
     deleteRound,
     getOngoingRound,
     getRoundById,
+    idpLogin,
 }
 
 playerRouter.use('/player',  graphqlHTTP({
