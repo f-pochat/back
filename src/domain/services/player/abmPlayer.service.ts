@@ -37,6 +37,10 @@ export class ABMPlayerService {
 
         const duplicatePlayerEmail: Player = await this.playerRepo.getByEmail(player.email);
 
+        if (duplicatePlayerEmail.password === 'google' || duplicatePlayerEmail.password === 'facebook'){
+            throw Error('Cant edit idp accounts');
+        }
+
         const hashedPassword = this.passwordHasher.hash(player.password);
         if (duplicatePlayerEmail.password === hashedPassword || duplicatePlayerEmail.password === player.password){
             this.playerRepo.editPlayer(id,new PlayerDB(id,player.email,true,player.fullname, duplicatePlayerEmail.password, player.handicap.toString(), player.photo));
